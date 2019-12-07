@@ -7,3 +7,10 @@ configure
 aclocal.m4
 src/config.h.in
 src/Makefile.in
+config.log
+config.status
+Makefile
+src/.deps/*
+src/Makefile
+src/config.h
+src/stamp-h1

@@ -1,0 +1,34 @@
+* cardgen, version 1.0
+
+cardgen is a utility that allows you to change the current directory 
+using cursor keys to navigate the directory tree structure. `fcd' uses 
+the `ncurses' library for cursor key input. Therefore, in order to 
+build `fcd' you will need to have ncurses installed in your 
+developement environment. 
+
+As you navigate though the directories, `fcd' will display a directory 
+listing to help indicate whether this is the directory you are looking 
+for. Once you have found the desired directory, hit `enter'.
+
+Processes operate in their own copy of the environment, so changing the 
+directory in `fcd' will not change the directory of the calling shell. 
+In order to apply the directory change in the shell we need use a 
+`trick'. In this case `fcd' writes the `cd <selected_directory>' 
+command to a temporary file and we create an alias for `fcd' which 
+calls `fcd' then sources the temporary file. By default the temporary 
+file is `/tmp/fcd', but this can be specified in the alias to anything 
+more appropriate.
+
+* General Build Instructions
+
+In general, this library can be built and installed with the following
+commands:
+
+    $ ./configure
+    $ make
+    $ make install prefix=PREFIX
+
+where PREFIX is the installation prefix.  By default, a prefix of
+/usr/local is used, such that `cardgen' is installed in /usr/local/bin. 
+
+

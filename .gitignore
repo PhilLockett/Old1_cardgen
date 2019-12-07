@@ -14,3 +14,5 @@ src/.deps/*
 src/Makefile
 src/config.h
 src/stamp-h1
+src/*.o
+src/*.exe

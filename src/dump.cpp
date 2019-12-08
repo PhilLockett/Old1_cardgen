@@ -214,12 +214,12 @@ int drawImageMagickJoker(ofstream & file, string & fileName)
 {
     string startString = genStartString();
 
-    string faceFile = string("extras/ImageMagick_logo.svg.png");
+    string faceFile = string("boneyard/ImageMagick_logo.svg.png");
     desc faceD(95, 50, 50, faceFile);
 
-    string headerFile = string("extras/ImageMagickUsage.png");
+    string headerFile = string("boneyard/ImageMagickUsage.png");
     desc headerD(4, 50, 10, headerFile);
-    string footerFile = string("extras/ImageMagickURL.png");
+    string footerFile = string("boneyard/ImageMagickURL.png");
     desc footerD(3, 50, 90, footerFile);
 
     file << startString;
@@ -239,11 +239,11 @@ int drawDefaultJoker(ofstream & file, string & fileName)
     string currentCardColour = cardColour;
     cardColour = "white";
 
-    string faceFile = string("extras/ImageMagick_logo.svg.png");
+    string faceFile = string("boneyard/ImageMagick_logo.svg.png");
     desc faceD(95, 50, 50, faceFile);
 
     startString = genStartString();
-    faceFile = string("extras/Back.png");
+    faceFile = string("boneyard/Back.png");
     faceD.setFileName(faceFile);
     file << startString;
     file << drawImage(faceD, "");

@@ -13,6 +13,9 @@ const char* suits[]     = { "C", "D", "H", "S" };
 const char* alts[]      = { "S", "H", "D", "C" };
 const char* cards[]     = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
 
+const char* suitNames[]     = { "Clubs", "Diamonds", "Hearts", "Spades" };
+const char* cardNames[]     = { "Joker", "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+
 string suit;
 string alt;
 string card;
@@ -256,8 +259,12 @@ int drawDefaultJoker(ofstream & file, string & fileName)
     return 1;
 }
 
-int drawJoker(int fails, ofstream & file, string fileName)
+
+int drawJoker(int fails, ofstream & file, int suit)
 {
+    file << "# Draw the " << suitNames[suit] << " " << cardNames[0] << " as file " << suits[suit] << cardNames[0] << ".png" << endl;
+
+    string fileName = string(suits[suit]) + cardNames[0];
     string faceFile = string("faces/") + face + "/" + fileName + ".png";
     desc faceD(95, 50, 50, faceFile);
     if (faceD.isFileFound())
@@ -316,10 +323,32 @@ int calcAndDumpValues(int argc, char *argv[])
     file << endl;
     file << "#" << endl;
     file << endl;
+    file << "# Make the directories."  << endl;
     file << "mkdir -p cards"  << endl;
     file << "mkdir -p cards/" << outputDirectory << endl;
-    file << "mv " << refreshFilename << " cards/" << outputDirectory << endl;
+
     file << endl;
+    file << "# Generate the refresh script."  << endl;
+    file << "cat <<EOM >cards/" << outputDirectory  << "/" << refreshFilename << endl;
+    file << "#!/bin/sh" << endl;
+    file << endl;
+    file << "# This file was generated using the following " << argv[0] << " command." << endl;
+    file << "#" << endl;
+    file << "cd ../../" << endl;
+    for (int i = 0; i < argc; ++i)
+    {
+        file << argv[i] << ' ';
+    }
+    file << endl;
+    file << "./" << scriptFilename << endl;
+    file << "EOM" << endl;
+    file << endl;
+
+#if 0
+    file << "if [ -f " << refreshFilename << " ]; then" << endl;
+    file << "    mv " << refreshFilename << " cards/" << outputDirectory << endl;
+    file << "fi" << endl;
+#endif
 
 
     string startString = genStartString();
@@ -342,6 +371,8 @@ int calcAndDumpValues(int argc, char *argv[])
         for (int c = 1; c < ELEMENTS(cards); ++c)
         {
             card = string(cards[c]);
+
+            file << "# Draw the " << cardNames[c] << " of " << suitNames[s] << " as file " << suit << card << ".png." << endl;
 
             string indexFile = string("indices/") + index + "/" + suit + card + ".png";
             desc indexD(Index, indexFile);
@@ -397,43 +428,18 @@ int calcAndDumpValues(int argc, char *argv[])
     }
 
 
-    // Add Jokers.
+//- Add the Jokers.
     boarderX = 7;
     boarderY = 5;
     recalculate();
 
     int fails = 0;
-    fails += drawJoker(fails, file, "CJoker");
-    fails += drawJoker(fails, file, "DJoker");
-    fails += drawJoker(fails, file, "HJoker");
-    fails += drawJoker(fails, file, "SJoker");
-
-
-    return 0;
-}
-
-int genRefreshFile(int argc, char *argv[])
-{
-    ofstream file(refreshFilename.c_str());
-
-    if (!file)
+    for (int s = 0; s < ELEMENTS(suits); ++s)
     {
-        cerr << "Can't open output file " << refreshFilename << endl;
-
-        return 1;
+        fails += drawJoker(fails, file, s);
     }
 
-    file << "#!/bin/sh" << endl;
-    file << endl;
-    file << "# This file was generated!" << endl;
-    file << "#" << endl;
-    file << "cd ../../" << endl;
-    for (int i = 0; i < argc; ++i)
-    {
-        file << argv[i] << ' ';
-    }
-    file << endl;
-    file << "./" << scriptFilename << endl;
+    file << "echo Output created in cards/" << outputDirectory << "/" << endl;
     file << endl;
 
     return 0;
@@ -441,6 +447,5 @@ int genRefreshFile(int argc, char *argv[])
 
 int dumpCode(int argc, char *argv[])
 {
-	genRefreshFile(argc, argv);
     return calcAndDumpValues(argc, argv);
 }

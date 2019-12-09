@@ -384,8 +384,6 @@ int generateScript(int argc, char *argv[])
         {
             card = string(cards[c]);
 
-            file << "# Draw the " << cardNames[c] << " of " << suitNames[s] << " as file " << suit << card << ".png." << endl;
-
             string indexFile = string("indices/") + index + "/" + suit + card + ".png";
             desc indexD(Index, indexFile);
             if (!indexD.isFileFound())
@@ -413,14 +411,15 @@ int generateScript(int argc, char *argv[])
 
 
 //- Write to output file.
+            file << "# Draw the " << cardNames[c] << " of " << suitNames[s] << " as file " << suit << card << ".png." << endl;
             file << startString;
 
             if ((faceD.useStandardPips()) || (faceD.isFileFound() && faceD.isLandscape()))
             {
-                file << drawFace;
+                file << drawFace;			// Draw either half of the pips or one of the landscape images.
             }
-            file << indexD.draw();
-            file << pipD.draw();
+            file << indexD.draw();			// Draw index.
+            file << pipD.draw();			// Draw corner pip.
 
             file << "\t-rotate 180 \\" << endl;
 
@@ -428,9 +427,9 @@ int generateScript(int argc, char *argv[])
             {
                 drawFace = drawStandardPips(2, c, pipFile);
             }
-            file << drawFace;
-            file << indexD.draw();
-            file << pipD.draw();
+            file << drawFace;				// Draw either the rest of the pips or the needed image.
+            file << indexD.draw();			// Draw index.
+            file << pipD.draw();			// Draw corner pip.
 
             file << "\t+dither -colors 256 \\" << endl;
             file << "\tcards/" << outputDirectory << "/" << suit << card << ".png" << endl;

@@ -1,3 +1,7 @@
+// dump.cpp: Card generation script generator.
+//
+///////////////////////////////////////////////////////////////////////////////
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -7,24 +11,26 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//- 
+//
+//- Internal variables.
+//
+static const char* suits[]     = { "C", "D", "H", "S" };
+static const char* alts[]      = { "S", "H", "D", "C" };
+static const char* cards[]     = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
 
-const char* suits[]     = { "C", "D", "H", "S" };
-const char* alts[]      = { "S", "H", "D", "C" };
-const char* cards[]     = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
+static const char* suitNames[]     = { "Clubs", "Diamonds", "Hearts", "Spades" };
+static const char* cardNames[]     = { "Joker", "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
 
-const char* suitNames[]     = { "Clubs", "Diamonds", "Hearts", "Spades" };
-const char* cardNames[]     = { "Joker", "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
-
-string suit;
-string alt;
-string card;
+static string suit;
+static string alt;
+static string card;
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//- 
-
-string genStartString(void)
+//
+//- Genarate the blank card string used as a template for each card.
+//
+static string genStartString(void)
 {
     stringstream outputStream;
     outputStream  << "convert -size " << cardWidth << "x" << cardHeight << " xc:transparent  \\" << endl;
@@ -35,9 +41,11 @@ string genStartString(void)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//-
-
-string drawStandardPips(int pass, int card, string FileName)
+//
+//- Generate the string for drawing the pips on the card. This is a two pass
+//  process. The second pass is after the image is rotated.
+//
+static string drawStandardPips(int pass, int card, const string & FileName)
 {
     stringstream outputStream;
     desc pipD(StandardPip, FileName);
@@ -140,9 +148,13 @@ string drawStandardPips(int pass, int card, string FileName)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//-
-
-string drawImage(desc & faceD, string FileName)
+//
+//- Generate the string for drawing the image on the card. Usually used for the
+//  court cards. Numerous internal variables need to be recalculated if the
+//  aspect ratio of the image is to be maintained, otherwise the image is
+//  stretched to fill the card.
+//
+static string drawImage(const desc & faceD, const string & FileName)
 {
     stringstream outputStream;
     int x = offsetX;
@@ -197,6 +209,7 @@ string drawImage(desc & faceD, string FileName)
 
     outputStream << "\t-draw \"image over " << x << ',' << y << ' ' << w << ',' << h << " '" << faceD.getFileName() << "'\" \\" << endl;
 
+//- Pip Filename is only supplied for court cards if they need pips adding.
     desc pipD(ImagePip, FileName);
     if (pipD.isFileFound() && ImagePip.getHeight())
     {
@@ -211,9 +224,10 @@ string drawImage(desc & faceD, string FileName)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//-
-
-int drawImageMagickJoker(ofstream & file, string & fileName)
+//
+//- Joker drawing routines - a bit messy, but gets the job done.
+//
+static int drawImageMagickJoker(ofstream & file, const string & fileName)
 {
     string startString = genStartString();
 
@@ -236,7 +250,7 @@ int drawImageMagickJoker(ofstream & file, string & fileName)
     return 1;
 }
 
-int drawDefaultJoker(ofstream & file, string & fileName)
+static int drawDefaultJoker(ofstream & file, const string & fileName)
 {
     string startString = genStartString();
     string currentCardColour = cardColour;
@@ -260,7 +274,7 @@ int drawDefaultJoker(ofstream & file, string & fileName)
 }
 
 
-int drawJoker(int fails, ofstream & file, int suit)
+static int drawJoker(int fails, ofstream & file, int suit)
 {
     file << "# Draw the " << suitNames[suit] << " " << cardNames[0] << " as file " << suits[suit] << cardNames[0] << ".png" << endl;
 
@@ -298,19 +312,22 @@ int drawJoker(int fails, ofstream & file, int suit)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//-
-
-int calcAndDumpValues(int argc, char *argv[])
+//
+//- The bulk of the script generation work.
+//
+int generateScript(int argc, char *argv[])
 {
     ofstream file(scriptFilename.c_str());
 
+//- Open the script file for writing.
     if (!file)
     {
-        cerr << "Can't open output file " << scriptFilename << endl;
+        cerr << "Can't open output file " << scriptFilename << " - aborting!" << endl;
 
         return 1;
     }
 
+//- Generate the initial preamble of the script.
     file << "#!/bin/sh" << endl;
     file << endl;
     file << "# This file was generated as \"" << scriptFilename << "\" using the following command:" << endl;
@@ -344,16 +361,11 @@ int calcAndDumpValues(int argc, char *argv[])
     file << "EOM" << endl;
     file << endl;
 
-#if 0
-    file << "if [ -f " << refreshFilename << " ]; then" << endl;
-    file << "    mv " << refreshFilename << " cards/" << outputDirectory << endl;
-    file << "fi" << endl;
-#endif
 
-
+//- Initial blank card string used as a template for each card.
     string startString = genStartString();
 
-
+//- Generate all the playing cards.
     for (int s = 0; s < ELEMENTS(suits); ++s)
     {
         suit    = string(suits[s]);
@@ -388,7 +400,7 @@ int calcAndDumpValues(int argc, char *argv[])
 
             string drawFace;
 
-
+//- If the face directory does not have the needed image file, use standard pips.
             pipFile = string("pips/") + pip + "/" + suit + ".png";      // Use standard pip file.
             if (faceD.useStandardPips())
             {
@@ -400,7 +412,7 @@ int calcAndDumpValues(int argc, char *argv[])
             }
 
 
-            // Write to output file.
+//- Write to output file.
             file << startString;
 
             if ((faceD.useStandardPips()) || (faceD.isFileFound() && faceD.isLandscape()))
@@ -428,7 +440,7 @@ int calcAndDumpValues(int argc, char *argv[])
     }
 
 
-//- Add the Jokers.
+//- Add the Jokers using narrower boarders.
     boarderX = 7;
     boarderY = 5;
     recalculate();
@@ -445,7 +457,4 @@ int calcAndDumpValues(int argc, char *argv[])
     return 0;
 }
 
-int dumpCode(int argc, char *argv[])
-{
-    return calcAndDumpValues(argc, argv);
-}
+

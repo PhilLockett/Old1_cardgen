@@ -1,10 +1,18 @@
-#if !defined _DESC_H_
-#define _DESC_H_
+// desc.h: Interface for the info and desc classes.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+#if !defined _DESC_H_INCLUDED_
+#define _DESC_H_INCLUDED_
 
 #include <string>
 
 using namespace std;
 
+///////////////////////////////////////////////////////////////////////////////
+//
+//- info class used to encapsulate position and size of an image.
+//
 class info
 {
 private:
@@ -25,6 +33,10 @@ public:
 
 };
 
+///////////////////////////////////////////////////////////////////////////////
+//
+//- desc class used to capture image file info and image info on the canvas.
+//
 class desc
 {
 private:
@@ -47,31 +59,32 @@ private:
 
 public:
 
-    desc(float H, float X, float Y, string FN);
-    desc(info & I, string FN);
+    desc(float H, float X, float Y, const string & FN);
+    desc(info & I, const string & FN);
     void repos(float X, float Y);
-    void setFileName(string FN);
-    string getFileName(void) { return FileName; }
+    void setFileName(const string & FN);
+    const string & getFileName(void) const { return FileName; }
 
-    float getCentreX(void) { return CentreX; }
-    float getCentreY(void) { return CentreY; }
-	float getHeight(void) { return Height; }
-	float getWidth(void) { return Width; }
+    float getCentreX(void) const { return CentreX; }
+    float getCentreY(void) const { return CentreY; }
+    float getHeight(void) const { return Height; }
+    float getWidth(void) const { return Width; }
 
-    int getHeightPX(void) { return HeightPX; }
-    int getWidthPX(void) { return WidthPX; }
-    float getAspectRatio(void) { return AspectRatio; }
-	int getOriginX(void) { return OriginX; }
-	int getOriginY(void) { return OriginY; }
-	string draw(void) { return DrawString; }
+    int getHeightPX(void) const { return HeightPX; }
+    int getWidthPX(void) const { return WidthPX; }
+    float getAspectRatio(void) const { return AspectRatio; }
+    int getOriginX(void) const { return OriginX; }
+    int getOriginY(void) const { return OriginY; }
+    const string & draw(void) const { return DrawString; }
 
-    float centre2OriginX(float centre) { return centre - (Width/2); }
-	float centre2OriginY(float centre) { return centre - (Height/2); }
+    float centre2OriginX(float centre) const { return centre - (Width/2); }
+    float centre2OriginY(float centre) const { return centre - (Height/2); }
 
-	bool isLandscape(void) { return HeightPX < WidthPX; }
-    bool isFileFound(void) { return FileFound; }
-    bool useStandardPips(void) { return !FileFound; }
+    bool isLandscape(void) const { return HeightPX < WidthPX; }
+    bool isFileFound(void) const { return FileFound; }
+    bool useStandardPips(void) const { return !FileFound; }
 
 };
 
-#endif //!defined _DESC_H_
+#endif //!defined _DESC_H_INCLUDED_
+

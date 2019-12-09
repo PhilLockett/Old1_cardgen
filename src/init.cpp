@@ -1,3 +1,7 @@
+// init.cpp: Command line parameter initialisation for the card generator.
+//
+///////////////////////////////////////////////////////////////////////////////
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
@@ -6,10 +10,12 @@
 
 #include <iostream>
 
-///////////////////////////////////////////////////////////////////////////////
-//- 
 
-void help(char *name)
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Display help message.
+//
+static void help(const char * const name)
 {
     cout << "Usage: " << name << " [Options]" << endl;
     cout << "  Generates the bash script \"" << scriptFilename << "\" which draws a pack of playing cards."<< endl;
@@ -48,7 +54,12 @@ void help(char *name)
     cout << "\t--Inputs value \t\t\t\tShortcut for: -f value -p value -i value." << endl;
 }
 
-int parseCommandLine(int argc, char *argv[])
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Process command line parameters with help from getopt_long().
+//
+static int parseCommandLine(int argc, char *argv[])
 {
     while (1)
     {
@@ -158,16 +169,20 @@ int parseCommandLine(int argc, char *argv[])
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Recalculate internal values using command line input.
+//
 int recalculate(void)
 {
     int ret = 0;
 
-    // Card outline values in pixels.
+//- Card outline values in pixels.
     radius = ROUND(cornerRadius * cardHeight / 100);
     outlineWidth = cardWidth-borderOffset-1;
     outlineHeight = cardHeight-borderOffset-1;
 
-    // Card face image values in pixels.
+//- Card face image values in pixels.
     imageOffset = 60;
     imageOffsetWidth = cardWidth-imageOffset-imageOffset;
     imageOffsetHeight = (cardHeight/2)-imageOffset+1;
@@ -182,7 +197,7 @@ int recalculate(void)
     imageX      = 50;
     imageY      = boarderY + (imageHeight / 2);
 
-    // If "outputDirectory" isn't explicitly set, use "face".
+//- If "outputDirectory" isn't explicitly set, use "face".
     if (!outputDirectory.length())
     {
         outputDirectory = face;
@@ -192,16 +207,21 @@ int recalculate(void)
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Initailise using command line input and recalculated internal values.
+//
 int init(int argc, char *argv[])
 {
     int ret = 0;
 
-    // Adjust value for nicer result.
+//- Adjust value for nicer result.
     Index.setHeight(10.0);          /* Height of index (as a % of card height). */
     CornerPip.setHeight(7.0);       /* Height of corner pip (as a % of card height). */
     StandardPip.setHeight(18.0);    /* Height of standard pip (as a % of card height). */
     ImagePip.setHeight(14.2);       /* Height of image pip (as a % of card height). */
 
+//- Process command line input.
     ret = parseCommandLine(argc, argv);
     if (!ret)
     {
@@ -210,3 +230,4 @@ int init(int argc, char *argv[])
 
     return ret;
 }
+

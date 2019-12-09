@@ -1,5 +1,14 @@
+// cardgen.h: Entry point for the card generator.
+//
+///////////////////////////////////////////////////////////////////////////////
+
 #include "cardgen.h"
 #include <sys/stat.h>
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Global variables.
+//
 
 // User defined.
 int cardWidth  = 380;
@@ -47,10 +56,12 @@ float imageY;
 
 
 ///////////////////////////////////////////////////////////////////////////////
-//- 
-
+//
+//- Entry point.
+//
 int main(int argc, char *argv[])
 {
+//- Get the command line parameters.
     int ret = init(argc, argv);
 
     if (ret < 0)
@@ -58,14 +69,15 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+//- If all is well, generate the script.
     if (!ret)
     {
-        dumpCode(argc, argv);
+        generateScript(argc, argv);
 
         // Ensure output scripts are executable.
         chmod(scriptFilename.c_str(), S_IRWXU|S_IRGRP|S_IXGRP|S_IROTH|S_IXOTH);
-        chmod(refreshFilename.c_str(), S_IRWXU|S_IRGRP|S_IXGRP|S_IROTH|S_IXOTH);
     }
 
     return 0;
 }
+

@@ -1,3 +1,7 @@
+// cardgen.h: Common interfaces for the card generator.
+//
+///////////////////////////////////////////////////////////////////////////////
+
 #if !defined _CARDGEN_H_INCLUDED_
 #define _CARDGEN_H_INCLUDED_
 
@@ -13,6 +17,11 @@ using namespace std;
 #if !defined ROUND
 #define ROUND(v) (int)((v) + 0.5)
 #endif
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Global variables.
+//
 
 // User defined.
 extern int cardWidth;
@@ -58,8 +67,13 @@ extern float imageX;
 extern float imageY;
 
 
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Common functions.
+//
 extern int recalculate(void);
 extern int init(int argc, char *argv[]);
-extern int dumpCode(int argc, char *argv[]);
+extern int generateScript(int argc, char *argv[]);
 
 #endif //!defined _CARDGEN_H_INCLUDED_
+

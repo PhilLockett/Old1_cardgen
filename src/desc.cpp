@@ -1,3 +1,7 @@
+// desc.cpp: Implementation for the info and desc classes.
+//
+///////////////////////////////////////////////////////////////////////////////
+
 #include "cardgen.h"
 #include "desc.h"
 
@@ -9,6 +13,11 @@
 #include <err.h>
 #include <sstream>
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Get the image size from the .png file.
+//
 int desc::getImageSize(void)
 {
     int ret = 1;
@@ -43,6 +52,11 @@ int desc::getImageSize(void)
     return ret;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Set up "DrawString"" for drawing the .png file with the correct size and position.
+//
 int desc::genDrawString(void)
 {
     stringstream outputStream;
@@ -52,7 +66,12 @@ int desc::genDrawString(void)
     return 0;
 }
 
-desc::desc(float H, float X, float Y, string FN)
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Constructors.
+//
+desc::desc(float H, float X, float Y, const string & FN)
 : FileName(FN), FileFound(false)
 {
     getImageSize();
@@ -65,7 +84,7 @@ desc::desc(float H, float X, float Y, string FN)
     genDrawString();
 }
 
-desc::desc(info & I, string FN)
+desc::desc(info & I, const string & FN)
 : FileName(FN), FileFound(false)
 {
     getImageSize();
@@ -78,6 +97,11 @@ desc::desc(info & I, string FN)
     genDrawString();
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Reposition image and adjust internal values.
+//
 void desc::repos(float X, float Y)
 {
     CentreX = X * cardWidth / 100;
@@ -87,7 +111,12 @@ void desc::repos(float X, float Y)
     genDrawString();
 }
 
-void desc::setFileName(string FN)
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Change image file image and adjust internal values.
+//
+void desc::setFileName(const string & FN)
 {
     FileName = FN;
     getImageSize();
@@ -95,3 +124,4 @@ void desc::setFileName(string FN)
     OriginX = ROUND(centre2OriginX(CentreX));
     genDrawString();
 }
+

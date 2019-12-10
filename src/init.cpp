@@ -45,7 +45,7 @@ static void help(const char * const name)
     cout << "\t--StandardPipCentreY value \t\tY value of centre of standard pip as a % of card height (default: " << StandardPip.getY() << ")." << endl;
     cout << "\t--ImageBoarderX value \t\t\tImage Boarder in X direction as a % of card width (default: " << boarderX << ")." << endl;
     cout << "\t--ImageBoarderY value \t\t\tImage Boarder in Y direction as a % of card height (default: " << boarderY << ")." << endl;
-    cout << "\t--ImagePipOff \t\t\t\tDon't display image pip " << endl;
+    cout << "\t--ImagePipOff \t\t\t\tDon't display image pip on the court cards." << endl;
     cout << "\t--ImagePipHeight value \t\t\tHeight of image pip as a % of card height (default: " << ImagePip.getHeight() << ")." << endl;
     cout << "\t--ImagePipCentreX value \t\tX value of centre of image pip as a % of card width relative to ImageBoarderX (default: " << ImagePip.getX() << ")." << endl;
     cout << "\t--ImagePipCentreY value \t\tY value of centre of image pip as a % of card height relative to ImageBoarderY (default: " << ImagePip.getY() << ")." << endl;

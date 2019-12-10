@@ -360,6 +360,8 @@ int generateScript(int argc, char *argv[])
     file << "./" << scriptFilename << endl;
     file << "EOM" << endl;
     file << endl;
+    file << "chmod +x cards/" << outputDirectory	<< "/" << refreshFilename << endl;
+    file << endl;
 
 
 //- Initial blank card string used as a template for each card.

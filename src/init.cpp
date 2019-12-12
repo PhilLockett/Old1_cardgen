@@ -7,6 +7,7 @@
 #include <getopt.h>
 
 #include "cardgen.h"
+#include "config.h"
 
 #include <iostream>
 
@@ -22,6 +23,7 @@ static void help(const char * const name)
     cout << endl;
     cout << "  Options:" << endl;
     cout << "\t--help \t\t\t\t\tThis help page and nothing else." << endl;
+    cout << "\t-v --version \t\t\t\tDisplay version." << endl;
     cout << endl;
     cout << "\t-i --index directory \t\t\tSubdirectory of indices to use (default: \"" << index << "\")." << endl;
     cout << "\t-p --pip directory \t\t\tSubdirectory of pips to use (default: \"" << pip << "\")." << endl;
@@ -54,6 +56,14 @@ static void help(const char * const name)
     cout << "\t--Inputs value \t\t\t\tShortcut for: -f value -p value -i value." << endl;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//
+//- Display version message.
+//
+static void version(const char * const name)
+{
+    cout << "Version " << VERSION << " of " << name << endl;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -101,10 +111,11 @@ static int parseCommandLine(int argc, char *argv[])
 
             {"CentreX", required_argument,0,16},
             {"Inputs", required_argument,0,17},
+            {"version", no_argument,0,'v'},
             {0,0,0,0}
         };
 
-        optchr = getopt_long(argc, argv ,"w:h:c:i:p:f:s:o:a", long_options, &option_index);
+        optchr = getopt_long(argc, argv ,"w:h:c:i:p:f:s:o:av", long_options, &option_index);
         if (optchr == -1)
             return 0;
 
@@ -152,6 +163,11 @@ static int parseCommandLine(int argc, char *argv[])
                 pip   = string(optarg);
                 face  = string(optarg);
                 break;
+
+            case 'v':
+                version(argv[0]);
+
+                return 2;
 
             case 0:
                 help(argv[0]);

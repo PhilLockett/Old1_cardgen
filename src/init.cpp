@@ -62,7 +62,8 @@ static void help(const char * const name)
 //
 static void version(const char * const name)
 {
-    cout << "Version " << VERSION << " of " << name << endl;
+    cout << "Version " VERSION " of " << name << endl;
+    cout << "Feedback to: " PACKAGE_BUGREPORT << endl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

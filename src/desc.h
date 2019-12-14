@@ -5,6 +5,7 @@
 #if !defined _DESC_H_INCLUDED_
 #define _DESC_H_INCLUDED_
 
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -30,6 +31,11 @@ public:
     float setX(float v) { CentreX = v; }
     float setY(float v) { CentreY = v; }
     float setHeight(float v) { Height = v; }
+
+    friend ostream & operator<<(ostream &os, const info &A) { A.print(os); return os; }
+
+protected:
+    void print(ostream &os=cout) const;
 
 };
 

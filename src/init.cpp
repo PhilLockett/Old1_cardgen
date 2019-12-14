@@ -224,6 +224,50 @@ int recalculate(void)
 }
 
 
+#if 0
+#define DEBUG
+static void dumpValues(void)
+{
+	cout << "face\t" << face << endl;
+	cout << "index\t" << index << endl;
+	cout << "pip\t" << pip << endl;
+	cout << "cardColour\t" << cardColour << endl;
+	cout << "scriptFilename\t" << scriptFilename << endl;
+	cout << "refreshFilename\t" << refreshFilename << endl;
+	cout << "outputDirectory\t" << outputDirectory << endl;
+	cout << endl;
+	cout << "keepAspectRatio\t" << keepAspectRatio << endl;
+	cout << "aspectRatio\t" << aspectRatio << endl;
+	cout << "cornerRadius\t" << cornerRadius << endl;
+	cout << "radius\t\t" << radius << endl;
+	cout << "strokeWidth\t" << strokeWidth << endl;
+	cout << "borderOffset\t" << borderOffset << endl;
+	cout << "outlineWidth\t" << outlineWidth << endl;
+	cout << "outlineHeight\t" << outlineHeight << endl;
+	cout << endl;
+	cout << "Index\t\t" << Index << endl;
+	cout << "CornerPip\t" << CornerPip << endl;
+	cout << "StandardPip\t" << StandardPip << endl;
+	cout << "ImagePip\t" << ImagePip << endl;
+	cout << endl;
+	cout << "cardWidth\t" << cardWidth << endl;
+	cout << "cardHeight\t" << cardHeight << endl;
+	cout << "imageOffset\t" << imageOffset << endl;
+	cout << "imageOffsetWidth\t" << imageOffsetWidth << endl;
+	cout << "imageOffsetHeight\t" << imageOffsetHeight << endl;
+	cout << "boarderX\t" << boarderX << endl;
+	cout << "boarderY\t" << boarderY << endl;
+	cout << "imageWidth\t" << imageWidth << endl;
+	cout << "imageHeight\t" << imageHeight << endl;
+	cout << "widthPX\t\t" << widthPX << endl;
+	cout << "heightPX\t" << heightPX << endl;
+	cout << "offsetX\t\t" << offsetX << endl;
+	cout << "offsetY\t\t" << offsetY << endl;
+	cout << "imageX\t\t" << imageX << endl;
+	cout << "imageY\t\t" << imageY << endl;
+}
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 //- Initailise using command line input and recalculated internal values.
@@ -244,6 +288,10 @@ int init(int argc, char *argv[])
     {
         recalculate();
     }
+
+#if defined DEBUG
+    dumpValues();
+#endif
 
     return ret;
 }

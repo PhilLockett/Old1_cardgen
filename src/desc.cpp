@@ -68,8 +68,15 @@ int desc::getImageSize(void)
 //
 int desc::genDrawString(void)
 {
+    if ((Height == 0) || (Width == 0))
+    {
+        DrawString = "";	// Don't draw anything here.
+
+        return 0;
+    }
+
     stringstream outputStream;
-    outputStream  << "\t-draw \"image over " << OriginX << ',' << OriginY << ' ' << ROUND(getWidth()) << ',' << ROUND(getHeight()) << " '" << FileName << "'\" \\" << endl;
+    outputStream  << "\t-draw \"image over " << OriginX << ',' << OriginY << ' ' << ROUND(Width) << ',' << ROUND(Height) << " '" << FileName << "'\" \\" << endl;
     DrawString = outputStream.str();
 
     return 0;

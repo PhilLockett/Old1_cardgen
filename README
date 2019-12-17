@@ -1,34 +1,38 @@
-* cardgen, version 1.0
+cardgen
+=====
 
-cardgen is a utility that allows you to change the current directory 
-using cursor keys to navigate the directory tree structure. `fcd' uses 
-the `ncurses' library for cursor key input. Therefore, in order to 
-build `fcd' you will need to have ncurses installed in your 
-developement environment. 
+cardgen is a command-line utility that images representing playing cards.
 
-As you navigate though the directories, `fcd' will display a directory 
-listing to help indicate whether this is the directory you are looking 
-for. Once you have found the desired directory, hit `enter'.
+The code generates a bash script the makes multiple calls to the ImageMagick 
+command, convert, to draw a standard pack of playing cards. It is very 
+configurable, allowing or playing cards of greatly varying styles to be 
+created.
 
-Processes operate in their own copy of the environment, so changing the 
-directory in `fcd' will not change the directory of the calling shell. 
-In order to apply the directory change in the shell we need use a 
-`trick'. In this case `fcd' writes the `cd <selected_directory>' 
-command to a temporary file and we create an alias for `fcd' which 
-calls `fcd' then sources the temporary file. By default the temporary 
-file is `/tmp/fcd', but this can be specified in the alias to anything 
-more appropriate.
+Installing from tarball
+-----------------------
 
-* General Build Instructions
+The install process described in the INSTALL document is a generic 
+description of the install process. The install process is also described 
+in the ‘Card Generator User Guide.pdf’ document. For completeness the install 
+process is also described below. All three descriptions are essentially the 
+same and clearly, it only needs to be installed once.
 
-In general, this library can be built and installed with the following
-commands:
+The install you will need a C++ compiler and make installed to compile 
+cardgen from a release tarball. You will also need the ImageMagick image 
+processing suite installed. The following command will unpack the tarball.
+
+$ tar zxf cardgen-1.0.tar.gz
+
+After unpacking, cd to the toplevel directory, cardgen-1.0, and issue the 
+following shell commands:
 
     $ ./configure
     $ make
-    $ make install prefix=PREFIX
+    $ sudo make install
 
-where PREFIX is the installation prefix.  By default, a prefix of
-/usr/local is used, such that `cardgen' is installed in /usr/local/bin. 
+Further reading
+---------------
 
+The document ‘Card Generator User Guide.pdf’ describes both the installation 
+process and usage.
 

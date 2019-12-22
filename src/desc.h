@@ -39,20 +39,28 @@ using namespace std;
 class info
 {
 private:
-    float CentreX;
-    float CentreY;
-    float Height;
+    float H;
+    float X;
+    float Y;
+    bool ChangedH;
+    bool ChangedX;
+    bool ChangedY;
 
 public:
-    info(float H, float X, float Y) : Height(H), CentreX(X), CentreY(Y) {}
+    info(float h, float x, float y) : H(h), X(x), Y(y), ChangedH(false), ChangedX(false), ChangedY(false) {}
+    info(const info & a) : H(a.H), X(a.X), Y(a.Y), ChangedH(false), ChangedX(false), ChangedY(false) {}
 
-    float getX(void) { return CentreX; }
-    float getY(void) { return CentreY; }
-    float getHeight(void) { return Height; }
+    float getH(void) { return H; }
+    float getX(void) { return X; }
+    float getY(void) { return Y; }
 
-    float setX(float v) { CentreX = v; }
-    float setY(float v) { CentreY = v; }
-    float setHeight(float v) { Height = v; }
+    bool isChangedH(void) { return ChangedH; }
+    bool isChangedX(void) { return ChangedX; }
+    bool isChangedY(void) { return ChangedY; }
+
+    void setH(float v) { ChangedH = true; H = v; }
+    void setX(float v) { ChangedX = true; X = v; }
+    void setY(float v) { ChangedY = true; Y = v; }
 
     friend ostream & operator<<(ostream &os, const info &A) { A.print(os); return os; }
 

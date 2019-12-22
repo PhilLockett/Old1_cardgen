@@ -232,14 +232,18 @@ static string drawImage(const desc & faceD, const string & FileName)
 
     outputStream << "\t-draw \"image over " << x << ',' << y << ' ' << w << ',' << h << " '" << faceD.getFileName() << "'\" \\" << endl;
 
-//- Pip Filename is only supplied for court cards if they need pips adding.
-    desc pipD(ImagePip, FileName);
-    if (pipD.isFileFound() && ImagePip.getHeight())
+//- Check if image pips have been turned off.
+    if (ImagePip.getH())
     {
-        outputStream << "\t-draw \"image over " << pipD.getOriginX()+x << ',' << pipD.getOriginY()+y << ' ' << ROUND(pipD.getWidth()) << ',' << ROUND(pipD.getHeight()) << " '" << FileName << "'\" \\" << endl;
-        outputStream << "\t-rotate 180 \\" << endl;
-        outputStream << "\t-draw \"image over " << pipD.getOriginX()+x << ',' << pipD.getOriginY()+y << ' ' << ROUND(pipD.getWidth()) << ',' << ROUND(pipD.getHeight()) << " '" << FileName << "'\" \\" << endl;
-        outputStream << "\t-rotate 180 \\" << endl;
+//- Pip Filename is only supplied for court cards if they need pips adding.
+        desc pipD(ImagePip, FileName);
+        if (pipD.isFileFound())
+        {
+            outputStream << "\t-draw \"image over " << pipD.getOriginX()+x << ',' << pipD.getOriginY()+y << ' ' << ROUND(pipD.getWidth()) << ',' << ROUND(pipD.getHeight()) << " '" << FileName << "'\" \\" << endl;
+            outputStream << "\t-rotate 180 \\" << endl;
+            outputStream << "\t-draw \"image over " << pipD.getOriginX()+x << ',' << pipD.getOriginY()+y << ' ' << ROUND(pipD.getWidth()) << ',' << ROUND(pipD.getHeight()) << " '" << FileName << "'\" \\" << endl;
+            outputStream << "\t-rotate 180 \\" << endl;
+        }
     }
 
     return outputStream.str();

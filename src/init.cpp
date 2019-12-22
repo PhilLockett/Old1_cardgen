@@ -58,19 +58,19 @@ static void help(const char * const name)
     cout << "\t-c --colour name \t\t\tBackground colour name (defined at: http://www.imagemagick.org/script/color.php, default: \"" << cardColour << "\")." << endl;
     cout << "\t-a --KeepAspectRatio \t\t\tKeep image Aspect Ratio (default: " << (keepAspectRatio ? "true" : "false") << ")." << endl;
     cout << endl;
-    cout << "\t--IndexHeight value \t\t\tHeight of index as a % of card height (default: " << Index.getHeight() << ")." << endl;
+    cout << "\t--IndexHeight value \t\t\tHeight of index as a % of card height (default: " << Index.getH() << ")." << endl;
     cout << "\t--IndexCentreX value \t\t\tX value of centre of index as a % of card width (default: " << Index.getX() << ")." << endl;
     cout << "\t--IndexCentreY value \t\t\tY value of centre of index as a % of card height (default: " << Index.getY() << ")." << endl;
-    cout << "\t--CornerPipHeight value \t\tHeight of corner pip as a % of card height (default: " << CornerPip.getHeight() << ")." << endl;
+    cout << "\t--CornerPipHeight value \t\tHeight of corner pip as a % of card height (default: " << CornerPip.getH() << ")." << endl;
     cout << "\t--CornerPipCentreX value \t\tX value of centre of corner pip as a % of card width (default: " << CornerPip.getX() << ")." << endl;
     cout << "\t--CornerPipCentreY value \t\tY value of centre of corner pip as a % of card height (default: " << CornerPip.getY() << ")." << endl;
-    cout << "\t--StandardPipHeight value \t\tHeight of standard pip as a % of card height (default: " << StandardPip.getHeight() << ")." << endl;
+    cout << "\t--StandardPipHeight value \t\tHeight of standard pip as a % of card height (default: " << StandardPip.getH() << ")." << endl;
     cout << "\t--StandardPipCentreX value \t\tX value of centre of standard pip as a % of card width (default: " << StandardPip.getX() << ")." << endl;
     cout << "\t--StandardPipCentreY value \t\tY value of centre of standard pip as a % of card height (default: " << StandardPip.getY() << ")." << endl;
     cout << "\t--ImageBoarderX value \t\t\tImage Boarder in X direction as a % of card width (default: " << boarderX << ")." << endl;
     cout << "\t--ImageBoarderY value \t\t\tImage Boarder in Y direction as a % of card height (default: " << boarderY << ")." << endl;
     cout << "\t--ImagePipOff \t\t\t\tDon't display image pip on the court cards." << endl;
-    cout << "\t--ImagePipHeight value \t\t\tHeight of image pip as a % of card height (default: " << ImagePip.getHeight() << ")." << endl;
+    cout << "\t--ImagePipHeight value \t\t\tHeight of image pip as a % of card height (default: " << ImagePip.getH() << ")." << endl;
     cout << "\t--ImagePipCentreX value \t\tX value of centre of image pip as a % of card width relative to ImageBoarderX (default: " << ImagePip.getX() << ")." << endl;
     cout << "\t--ImagePipCentreY value \t\tY value of centre of image pip as a % of card height relative to ImageBoarderY (default: " << ImagePip.getY() << ")." << endl;
     cout << endl;
@@ -157,22 +157,22 @@ static int parseCommandLine(int argc, char *argv[])
 
             case 'a': keepAspectRatio = true;           break;
 
-            case 1:   Index.setHeight(atof(optarg));    break;
+            case 1:   Index.setH(atof(optarg));         break;
             case 2:   Index.setX(atof(optarg));         break;
             case 3:   Index.setY(atof(optarg));         break;
 
-            case 4:   CornerPip.setHeight(atof(optarg));break;
+            case 4:   CornerPip.setH(atof(optarg));     break;
             case 5:   CornerPip.setX(atof(optarg));     break;
             case 6:   CornerPip.setY(atof(optarg));     break;
 
-            case 7:   StandardPip.setHeight(atof(optarg));break;
+            case 7:   StandardPip.setH(atof(optarg));   break;
             case 8:   StandardPip.setX(atof(optarg));   break;
             case 9:   StandardPip.setY(atof(optarg));   break;
 
             case 10:  boarderX = atof(optarg);          break;
             case 11:  boarderY = atof(optarg);          break;
-            case 12:  ImagePip.setHeight(0);            break;
-            case 13:  ImagePip.setHeight(atof(optarg)); break;
+            case 12:  ImagePip.setH(0);                 break;
+            case 13:  ImagePip.setH(atof(optarg));      break;
             case 14:  ImagePip.setX(atof(optarg));      break;
             case 15:  ImagePip.setY(atof(optarg));      break;
 
@@ -295,10 +295,10 @@ int init(int argc, char *argv[])
     int ret = 0;
 
 //- Adjust value for nicer result.
-    Index.setHeight(10.0);          /* Height of index (as a % of card height). */
-    CornerPip.setHeight(7.0);       /* Height of corner pip (as a % of card height). */
-    StandardPip.setHeight(18.0);    /* Height of standard pip (as a % of card height). */
-    ImagePip.setHeight(14.2);       /* Height of image pip (as a % of card height). */
+    Index.setH(10.0);          /* Height of index (as a % of card height). */
+    CornerPip.setH(7.0);       /* Height of corner pip (as a % of card height). */
+    StandardPip.setH(18.0);    /* Height of standard pip (as a % of card height). */
+    ImagePip.setH(14.2);       /* Height of image pip (as a % of card height). */
 
 //- Process command line input.
     ret = parseCommandLine(argc, argv);

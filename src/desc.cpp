@@ -42,7 +42,7 @@
 //
 void info::print(ostream &os) const
 {
-    os << Height << "\t(" << CentreX << ", " << CentreY << ")";
+    os << H << "\t(" << X << ", " << Y << ")";
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -126,7 +126,7 @@ desc::desc(info & I, const string & FN)
 : FileName(FN), FileFound(false)
 {
     getImageSize();
-    Height  = I.getHeight() * cardHeight / 100;
+    Height  = I.getH() * cardHeight / 100;
     Width   = Height * WidthPX / HeightPX;
     CentreX = I.getX() * cardWidth / 100;
     CentreY = I.getY() * cardHeight / 100;

@@ -184,6 +184,7 @@ static string drawImage(const desc & faceD, const string & FileName)
     int w = widthPX;
     int h = heightPX;
     float scale = 1;
+    float aspectRatio = 0.0;
 
     if (faceD.isLandscape())
     {

@@ -64,7 +64,6 @@ extern string outputDirectory;
 extern string refreshFilename;
 
 extern bool keepAspectRatio;
-extern float aspectRatio;
 
 extern float cornerRadius;
 extern int radius;
@@ -73,9 +72,6 @@ extern int borderOffset;
 extern int outlineWidth;
 extern int outlineHeight;
 
-extern int imageOffset;
-extern int imageOffsetWidth;
-extern int imageOffsetHeight;
 
 extern float boarderX;
 extern float boarderY;

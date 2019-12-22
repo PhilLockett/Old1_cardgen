@@ -52,7 +52,6 @@ string refreshFilename("x_refresh.sh");
 string outputDirectory;
 
 bool keepAspectRatio = false;
-float aspectRatio = 0.0;
 
 float cornerRadius = 3.7594;
 int radius;
@@ -60,10 +59,6 @@ int strokeWidth = 2;
 int borderOffset = 1;
 int outlineWidth;
 int outlineHeight;
-
-int imageOffset;
-int imageOffsetWidth;
-int imageOffsetHeight;
 
 float boarderX = 14.5379;
 float boarderY = 10.1364;

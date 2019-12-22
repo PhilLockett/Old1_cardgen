@@ -56,7 +56,7 @@ static void help(const char * const name)
     cout << "\t-w --width integer \t\t\tCard width in pixels (default: " << cardWidth << ")." << endl;
     cout << "\t-h --height integer \t\t\tCard height in pixels (default: " << cardHeight << ")." << endl;
     cout << "\t-c --colour name \t\t\tBackground colour name (defined at: http://www.imagemagick.org/script/color.php, default: \"" << cardColour << "\")." << endl;
-    cout << "\t-a --KeepAspectRatio \t\t\tKeep image Aspect Ratio (default: " << (aspectRatio ? "true" : "false") << ")." << endl;
+    cout << "\t-a --KeepAspectRatio \t\t\tKeep image Aspect Ratio (default: " << (keepAspectRatio ? "true" : "false") << ")." << endl;
     cout << endl;
     cout << "\t--IndexHeight value \t\t\tHeight of index as a % of card height (default: " << Index.getHeight() << ")." << endl;
     cout << "\t--IndexCentreX value \t\t\tX value of centre of index as a % of card width (default: " << Index.getX() << ")." << endl;
@@ -222,10 +222,6 @@ int recalculate(void)
     outlineHeight = cardHeight-borderOffset-1;
 
 //- Card face image values in pixels.
-    imageOffset = 60;
-    imageOffsetWidth = cardWidth-imageOffset-imageOffset;
-    imageOffsetHeight = (cardHeight/2)-imageOffset+1;
-
     imageWidth  = 100 - (2 * boarderX);
     imageHeight = 50 - boarderY;
     widthPX     = ROUND(imageWidth * cardWidth / 100);

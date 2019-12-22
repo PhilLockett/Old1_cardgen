@@ -62,6 +62,11 @@ int outlineHeight;
 
 float boarderX = 14.54;
 float boarderY = 10.14;
+float originalImageWidth = 100 - (2 * boarderX);
+float originalImageHeight = 50 - boarderY;
+int originalWidthPX  = ROUND(originalImageWidth * cardWidth / 100);
+int originalHeightPX = ROUND(originalImageHeight * cardHeight / 100);
+
 float imageWidth;
 float imageHeight;
 int widthPX;

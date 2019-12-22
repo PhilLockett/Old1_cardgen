@@ -72,9 +72,13 @@ extern int borderOffset;
 extern int outlineWidth;
 extern int outlineHeight;
 
-
 extern float boarderX;
 extern float boarderY;
+extern float originalImageWidth;
+extern float originalImageHeight;
+extern int originalWidthPX;
+extern int originalHeightPX;
+
 extern float imageWidth;
 extern float imageHeight;
 extern int widthPX;

@@ -174,7 +174,8 @@ static string drawStandardPips(int pass, int card, const string & FileName)
 //- Generate the string for drawing the image on the card. Usually used for the
 //  court cards. Numerous internal variables need to be recalculated if the
 //  aspect ratio of the image is to be maintained, otherwise the image is
-//  stretched to fill the card.
+//  stretched to fill the card. Note that this is done for each image because
+//  the dimensions can vary.
 //
 static string drawImage(const desc & faceD, const string & FileName)
 {
@@ -232,11 +233,40 @@ static string drawImage(const desc & faceD, const string & FileName)
 
     outputStream << "\t-draw \"image over " << x << ',' << y << ' ' << w << ',' << h << " '" << faceD.getFileName() << "'\" \\" << endl;
 
-//- Check if image pips have been turned off.
+//- Check if image pips are required.
     if (ImagePip.getH())
     {
+        info scaledPip(ImagePip);
+
+//- Rescale image pips, but only if they haven't been manually altered.
+        if (!ImagePip.isChangedH())
+        {
+            scale = (float)h / originalHeightPX;
+            if (!faceD.isLandscape())
+            {
+                scale /= 2;
+            }
+            scaledPip.setH(scale * ImagePip.getH());
+        }
+
+        if (!ImagePip.isChangedX())
+        {
+            scale = (float)w / originalWidthPX;
+            scaledPip.setX(scale * ImagePip.getX());
+        }
+
+        if (!ImagePip.isChangedY())
+        {
+            scale = (float)h / originalHeightPX;
+            if (!faceD.isLandscape())
+            {
+                scale /= 2;
+            }
+            scaledPip.setY(scale * ImagePip.getY());
+        }
+
 //- Pip Filename is only supplied for court cards if they need pips adding.
-        desc pipD(ImagePip, FileName);
+        desc pipD(scaledPip, FileName);
         if (pipD.isFileFound())
         {
             outputStream << "\t-draw \"image over " << pipD.getOriginX()+x << ',' << pipD.getOriginY()+y << ' ' << ROUND(pipD.getWidth()) << ',' << ROUND(pipD.getHeight()) << " '" << FileName << "'\" \\" << endl;

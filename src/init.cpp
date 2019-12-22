@@ -294,12 +294,6 @@ int init(int argc, char *argv[])
 {
     int ret = 0;
 
-//- Adjust value for nicer result.
-    Index.setH(10.0);          /* Height of index (as a % of card height). */
-    CornerPip.setH(7.0);       /* Height of corner pip (as a % of card height). */
-    StandardPip.setH(18.0);    /* Height of standard pip (as a % of card height). */
-    ImagePip.setH(14.2);       /* Height of image pip (as a % of card height). */
-
 //- Process command line input.
     ret = parseCommandLine(argc, argv);
     if (!ret)

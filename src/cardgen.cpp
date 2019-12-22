@@ -38,10 +38,10 @@ int cardHeight = 532;
 string cardColour("white");
 
 
-info Index(10.5019, 8.06791, 9.83619);
-info CornerPip(7.73431, 8.06791, 20.4054);
-info StandardPip(18.8945, 25.3007, 18.6476);
-info ImagePip(14.2857, 12.6316, 9.7744);
+info Index(10.5, 8.07, 9.84);
+info CornerPip(7.5, 8.07, 20.41);
+info StandardPip(18.5, 25.7, 18.65);
+info ImagePip(14.29, 12.63, 9.77);
 
 string index("1");
 string pip("1");
@@ -53,15 +53,15 @@ string outputDirectory;
 
 bool keepAspectRatio = false;
 
-float cornerRadius = 3.7594;
+float cornerRadius = 3.76;
 int radius;
 int strokeWidth = 2;
 int borderOffset = 1;
 int outlineWidth;
 int outlineHeight;
 
-float boarderX = 14.5379;
-float boarderY = 10.1364;
+float boarderX = 14.54;
+float boarderY = 10.14;
 float imageWidth;
 float imageHeight;
 int widthPX;

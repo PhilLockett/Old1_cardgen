@@ -422,14 +422,16 @@ int generateScript(int argc, char *argv[])
 
             string drawFace;
 
-//- If the face directory does not have the needed image file, use standard pips.
             pipFile = string("pips/") + pip + "/" + suit + ".png";      // Use standard pip file.
             if (faceD.useStandardPips())
             {
+                // The face directory does not have the needed image file, use standard pips.
                 drawFace = drawStandardPips(1, c, pipFile);
             }
             else
             {
+                // The face directory does have the needed image file, so use it.
+                // Note, we only pass the pipfile name for the court cards (c > 10).
                 drawFace = drawImage(faceD, c > 10 ? pipFile : "");
             }
 

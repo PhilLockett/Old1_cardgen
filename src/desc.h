@@ -76,6 +76,7 @@ protected:
 class desc
 {
 private:
+    bool isValidPNG(const char * const buffer);
     int getImageSize(void);
     int genDrawString(void);
     string DrawString;
@@ -94,7 +95,6 @@ private:
     string FileName;
 
 public:
-
     desc(float H, float X, float Y, const string & FN);
     desc(info & I, const string & FN);
     void repos(float X, float Y);

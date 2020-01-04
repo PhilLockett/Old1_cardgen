@@ -27,13 +27,9 @@
 #include "cardgen.h"
 #include "desc.h"
 
-
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include <arpa/inet.h>
-#include <err.h>
 #include <sstream>
+#include <fstream>
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -45,42 +41,54 @@ void info::print(ostream &os) const
     os << H << "\t(" << X << ", " << Y << ")";
 }
 
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 //- Get the image size from the .png file.
 //
+bool desc::isValidPNG(const char * const buffer)
+{
+    const uint8_t magic[] = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
+    for (int i = 0; i < sizeof(magic); ++i)
+    {
+        if ((uint8_t)buffer[i] != magic[i])
+            return false;
+    }
+
+    return true;
+}
+
 int desc::getImageSize(void)
 {
-    int ret = 1;
-    int fd;
-    uint32_t h, w;
-
+    FileFound = false;
     WidthPX = 1;
     HeightPX = 1;
     AspectRatio = 1;
-    FileFound = false;
 
-    if ((fd = open(FileName.c_str(), O_RDONLY)) != -1)
+//- Open the binary file.
+    ifstream file(FileName, ifstream::in|ifstream::binary);
+
+    if (!file.is_open())
     {
-        if (lseek(fd, 16, SEEK_SET) != -1)
-        {
-            if (read(fd, &w, 4) == 4)
-            {
-                if (read(fd, &h, 4) == 4)
-                {
-                    WidthPX = htonl(w);
-                    HeightPX = htonl(h);
-                    AspectRatio = float(WidthPX) / HeightPX;
-                    ret = 0;
-                    FileFound = true;
-                }
-            }
-        }
-
-        close(fd);
+        return 1;
     }
 
-    return ret;
+//- Success. Read header data.
+    char buffer[28];
+
+    file.read(buffer, 24);
+    if ((file) && (isValidPNG(buffer)))
+    {
+        FileFound = true;
+        WidthPX = htonl(*(uint32_t *)(buffer+16));
+        HeightPX = htonl(*(uint32_t *)(buffer+20));
+        AspectRatio = float(WidthPX) / HeightPX;
+    }
+
+    file.close();
+
+    return 0;
 }
 
 

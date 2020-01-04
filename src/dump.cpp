@@ -479,8 +479,8 @@ int generateScript(int argc, char *argv[])
             {
                 file << drawFace;			// Draw either half of the pips or one of the landscape images.
             }
-            file << indexD.draw();			// Draw index.
             file << pipD.draw();			// Draw corner pip.
+            file << indexD.draw();			// Draw index.
 
             file << "\t-rotate 180 \\" << endl;
 
@@ -489,8 +489,8 @@ int generateScript(int argc, char *argv[])
                 drawFace = drawStandardPips(2, c, pipFile);
             }
             file << drawFace;				// Draw either the rest of the pips or the needed image.
-            file << indexD.draw();			// Draw index.
             file << pipD.draw();			// Draw corner pip.
+            file << indexD.draw();			// Draw index.
 
             file << "\t+dither -colors 256 \\" << endl;
             file << "\tcards/" << outputDirectory << "/" << suit << card << ".png" << endl;

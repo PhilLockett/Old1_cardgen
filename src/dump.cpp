@@ -338,12 +338,27 @@ static int drawJoker(int fails, ofstream & file, int suit)
     string fileName = string(suits[suit]) + cardNames[0];
     string faceFile = string("faces/") + face + "/" + fileName + ".png";
     desc faceD(95, 50, 50, faceFile);
-    if (faceD.isFileFound())
+
+    string indexFile = string("indices/") + index + "/" + fileName + ".png";
+    desc indexD(Index, indexFile);
+
+    if ((indexD.isFileFound()) || (faceD.isFileFound()))
     {
         string startString = genStartString();
-
         file << startString;
-        file << drawImage(faceD, "");
+
+        if (indexD.isFileFound())
+        {
+            file << indexD.draw();          // Draw index.
+            file << "\t-rotate 180 \\" << endl;
+            file << indexD.draw();          // Draw index.
+        }
+
+        if (faceD.isFileFound())
+        {
+            file << drawImage(faceD, "");
+        }
+
         file << "\t+dither -colors 256 \\" << endl;
         file << "\tcards/" << outputDirectory << "/" << fileName << ".png" << endl;
         file << endl;
@@ -503,6 +518,8 @@ int generateScript(int argc, char *argv[])
 //- Add the Jokers using narrower boarders.
     boarderX = 7;
     boarderY = 5;
+	Index.setH(30.0);
+	Index.setY(20.0);
     recalculate();
 
     int fails = 0;

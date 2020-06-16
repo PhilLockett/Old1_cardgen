@@ -47,9 +47,9 @@ static void help(const char * const name)
     cout << "\t--help \t\t\t\t\tThis help page and nothing else." << endl;
     cout << "\t-v --version \t\t\t\tDisplay version." << endl;
     cout << endl;
-    cout << "\t-i --index directory \t\t\tSubdirectory of indices to use (default: \"" << index << "\")." << endl;
-    cout << "\t-p --pip directory \t\t\tSubdirectory of pips to use (default: \"" << pip << "\")." << endl;
-    cout << "\t-f --face directory \t\t\tSubdirectory of faces to use (default: \"" << face << "\")." << endl;
+    cout << "\t-i --index directory \t\t\tSubdirectory of indices to use (default: \"" << indexDir << "\")." << endl;
+    cout << "\t-p --pip directory \t\t\tSubdirectory of pips to use (default: \"" << pipDir << "\")." << endl;
+    cout << "\t-f --face directory \t\t\tSubdirectory of faces to use (default: \"" << faceDir << "\")." << endl;
     cout << endl;
     cout << "\t-s --script filename \t\t\tScript filename (default: \"" << scriptFilename << "\")." << endl;
     cout << "\t-o --output directory \t\t\tOutput filename (default: same directory name as face)." << endl;
@@ -148,9 +148,9 @@ static int parseCommandLine(int argc, char *argv[])
             case 'h': cardHeight = atoi(optarg);        break;
             case 'c': cardColour = string(optarg);      break;
 
-            case 'i': index = string(optarg);           break;
-            case 'p': pip = string(optarg);             break;
-            case 'f': face = string(optarg);            break;
+            case 'i': indexDir = string(optarg);           break;
+            case 'p': pipDir = string(optarg);             break;
+            case 'f': faceDir = string(optarg);            break;
 
             case 's': scriptFilename = string(optarg);  break;
             case 'o': outputDirectory = string(optarg); break;
@@ -182,9 +182,9 @@ static int parseCommandLine(int argc, char *argv[])
                 break;
 
             case 17:
-                index = string(optarg);
-                pip   = string(optarg);
-                face  = string(optarg);
+                indexDir = string(optarg);
+                pipDir   = string(optarg);
+                faceDir  = string(optarg);
                 break;
 
             case 'v':
@@ -235,7 +235,7 @@ int recalculate(void)
 //- If "outputDirectory" isn't explicitly set, use "face".
     if (!outputDirectory.length())
     {
-        outputDirectory = face;
+        outputDirectory = faceDir;
     }
 
     return ret;

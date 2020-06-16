@@ -55,9 +55,9 @@ extern info CornerPip;
 extern info StandardPip;
 extern info ImagePip;
 
-extern string index;
-extern string pip;
-extern string face;
+extern string indexDir;
+extern string pipDir;
+extern string faceDir;
 
 extern string scriptFilename;
 extern string outputDirectory;

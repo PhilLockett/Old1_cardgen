@@ -336,10 +336,10 @@ static int drawJoker(int fails, ofstream & file, int suit)
     file << "# Draw the " << suitNames[suit] << " " << cardNames[0] << " as file " << suits[suit] << cardNames[0] << ".png" << endl;
 
     string fileName = string(suits[suit]) + cardNames[0];
-    string faceFile = string("faces/") + face + "/" + fileName + ".png";
+    string faceFile = string("faces/") + faceDir + "/" + fileName + ".png";
     desc faceD(95, 50, 50, faceFile);
 
-    string indexFile = string("indices/") + index + "/" + fileName + ".png";
+    string indexFile = string("indices/") + indexDir + "/" + fileName + ".png";
     desc indexD(Index, indexFile);
 
     if ((indexD.isFileFound()) || (faceD.isFileFound()))
@@ -445,12 +445,12 @@ int generateScript(int argc, char *argv[])
         suit    = string(suits[s]);
         alt     = string(alts[s]);
 
-        string pipFile = string("pips/") + pip + "/" + suit + "S.png";      // Try small pip file first.
+        string pipFile = string("pips/") + pipDir + "/" + suit + "S.png";      // Try small pip file first.
         desc pipD(CornerPip, pipFile);
         if (!pipD.isFileFound())
         {
             // Small pip file not found, so use standard pip file.
-            pipFile = string("pips/") + pip + "/" + suit + ".png";
+            pipFile = string("pips/") + pipDir + "/" + suit + ".png";
             pipD.setFileName(pipFile);
         }
 
@@ -458,21 +458,21 @@ int generateScript(int argc, char *argv[])
         {
             card = string(cards[c]);
 
-            string indexFile = string("indices/") + index + "/" + suit + card + ".png";
+            string indexFile = string("indices/") + indexDir + "/" + suit + card + ".png";
             desc indexD(Index, indexFile);
             if (!indexD.isFileFound())
             {
                 // Index for suit file not found, so use alternate index file.
-                indexFile = string("indices/") + index + "/" + alt + card + ".png";
+                indexFile = string("indices/") + indexDir + "/" + alt + card + ".png";
                 indexD.setFileName(indexFile);
             }
 
-            string faceFile = string("faces/") + face + "/" + suit + card + ".png";
+            string faceFile = string("faces/") + faceDir + "/" + suit + card + ".png";
             desc faceD(imageHeight, imageX, imageY, faceFile);
 
             string drawFace;
 
-            pipFile = string("pips/") + pip + "/" + suit + ".png";      // Use standard pip file.
+            pipFile = string("pips/") + pipDir + "/" + suit + ".png";      // Use standard pip file.
             if (faceD.useStandardPips())
             {
                 // The face directory does not have the needed image file, use standard pips.

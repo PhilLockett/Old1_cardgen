@@ -43,9 +43,9 @@ info CornerPip(7.5, 8.07, 20.41);
 info StandardPip(18.5, 25.7, 18.65);
 info ImagePip(14.29, 12.63, 9.77);
 
-string index("1");
-string pip("1");
-string face("1");
+string indexDir("1");
+string pipDir("1");
+string faceDir("1");
 
 string scriptFilename("draw.sh");
 string refreshFilename("x_refresh.sh");

@@ -36,12 +36,12 @@
  *
  */
 
-static const char* suits[]     = { "C", "D", "H", "S" };
-static const char* alts[]      = { "S", "H", "D", "C" };
-static const char* cards[]     = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
+static const char* suits[]  = { "C", "D", "H", "S" };
+static const char* alts[]   = { "S", "H", "D", "C" };
+static const char* cards[]  = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
 
-static const char* suitNames[]     = { "Clubs", "Diamonds", "Hearts", "Spades" };
-static const char* cardNames[]     = { "Joker", "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+static const char* suitNames[]  = { "Clubs", "Diamonds", "Hearts", "Spades" };
+static const char* cardNames[]  = { "Joker", "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
 
 static string suit;
 static string alt;
@@ -65,7 +65,7 @@ static string genStartString(void)
 
 /**
  * Generate the string for drawing the pips on the card. This is a two pass
- * process. The second pass is after the image is rotated.
+ * process. The second pass is after the card image has been rotated.
  *
  * @param  pass - First or second pass.
  * @param  card - 1 to 13 (ace to king).

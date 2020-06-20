@@ -1,42 +1,40 @@
-/*  cardgen - a playing card image generator.
-
-    Copyright 2019 Philip Lockett.
-
-    This file is part of cardgen.
-
-    cardgen is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    cardgen is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with cardgen.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// cardgen.h: Entry point for the card generator.
-//
-///////////////////////////////////////////////////////////////////////////////
+/**
+ * @file    cardgen.cpp
+ * @author  Phil Lockett <phillockett65@gmail.com>
+ * @version 1.0
+ *
+ * @section LICENSE
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details at
+ * https://www.gnu.org/copyleft/gpl.html
+ *
+ * @section DESCRIPTION
+ *
+ * 'cardgen' is a playing card image generator.
+ *
+ * System entry point for the card generator.
+ */
 
 #include "cardgen.h"
 #include <sys/stat.h>
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Global variables.
-//
 
-// User defined.
+/**
+ * @section Global variables.
+ *
+ */
+
 int cardWidth  = 380;
 int cardHeight = 532;
 string cardColour("white");
-
 
 info Index(10.5, 8.07, 9.84);
 info CornerPip(7.5, 8.07, 20.41);
@@ -77,10 +75,13 @@ float imageX;
 float imageY;
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Entry point.
-//
+/**
+ * System entry point.
+ *
+ * @param  argc - command line argument count.
+ * @param  argv - command line argument vector.
+ * @return error value or 0 if no errors.
+ */
 int main(int argc, char *argv[])
 {
 //- Get the command line parameters.

@@ -1,28 +1,27 @@
-/*  cardgen - a playing card image generator.
-
-    Copyright 2019 Philip Lockett.
-
-    This file is part of cardgen.
-
-    cardgen is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    cardgen is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with cardgen.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// init.cpp: Command line parameter initialisation for the card generator.
-//
-///////////////////////////////////////////////////////////////////////////////
+/**
+ * @file    init.cpp
+ * @author  Phil Lockett <phillockett65@gmail.com>
+ * @version 1.0
+ *
+ * @section LICENSE
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details at
+ * https://www.gnu.org/copyleft/gpl.html
+ *
+ * @section DESCRIPTION
+ *
+ * 'cardgen' is a playing card image generator.
+ *
+ * Command line parameter initialisation for the card generator.
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,10 +33,11 @@
 #include <iostream>
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Display help message.
-//
+/**
+ * Display help message.
+ *
+ * @param  name - of application.
+ */
 static void help(const char * const name)
 {
     cout << "Usage: " << name << " [Options]" << endl;
@@ -78,20 +78,27 @@ static void help(const char * const name)
     cout << "\t--Inputs value \t\t\t\tShortcut for: -f value -p value -i value." << endl;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Display version message.
-//
+
+/**
+ * Display version message.
+ *
+ * @param  name - of application.
+ */
 static void version(const char * const name)
 {
     cout << "Version " VERSION " of " << name << endl;
     cout << "Feedback to: " PACKAGE_BUGREPORT << endl;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Process command line parameters with help from getopt_long().
-//
+
+/**
+ * Process command line parameters with help from getopt_long() and update
+ * global variables.
+ *
+ * @param  argc - command line argument count.
+ * @param  argv - command line argument vector.
+ * @return error value or 0 if no errors.
+ */
 static int parseCommandLine(int argc, char *argv[])
 {
     while (1)
@@ -148,9 +155,9 @@ static int parseCommandLine(int argc, char *argv[])
             case 'h': cardHeight = atoi(optarg);        break;
             case 'c': cardColour = string(optarg);      break;
 
-            case 'i': indexDir = string(optarg);           break;
-            case 'p': pipDir = string(optarg);             break;
-            case 'f': faceDir = string(optarg);            break;
+            case 'i': indexDir = string(optarg);        break;
+            case 'p': pipDir = string(optarg);          break;
+            case 'f': faceDir = string(optarg);         break;
 
             case 's': scriptFilename = string(optarg);  break;
             case 'o': outputDirectory = string(optarg); break;
@@ -208,14 +215,12 @@ static int parseCommandLine(int argc, char *argv[])
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Recalculate internal values using command line input.
-//
-int recalculate(void)
+/**
+ * Recalculate global variables using command line input.
+ *
+ */
+void recalculate(void)
 {
-    int ret = 0;
-
 //- Card outline values in pixels.
     radius = ROUND(cornerRadius * cardHeight / 100);
     outlineWidth = cardWidth-borderOffset-1;
@@ -237,8 +242,6 @@ int recalculate(void)
     {
         outputDirectory = faceDir;
     }
-
-    return ret;
 }
 
 
@@ -286,10 +289,15 @@ static void dumpValues(void)
 }
 #endif
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Initailise using command line input and recalculated internal values.
-//
+
+/**
+ * Initialise cardgen using command line input and recalculate global
+ * variables.
+ *
+ * @param  argc - command line argument count.
+ * @param  argv - command line argument vector.
+ * @return error value or 0 if no errors.
+ */
 int init(int argc, char *argv[])
 {
     int ret = 0;

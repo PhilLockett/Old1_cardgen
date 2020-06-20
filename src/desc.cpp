@@ -1,28 +1,27 @@
-/*  cardgen - a playing card image generator.
-
-    Copyright 2019 Philip Lockett.
-
-    This file is part of cardgen.
-
-    cardgen is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    cardgen is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with cardgen.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// desc.cpp: Implementation for the info and desc classes.
-//
-///////////////////////////////////////////////////////////////////////////////
+/**
+ * @file    desc.cpp
+ * @author  Phil Lockett <phillockett65@gmail.com>
+ * @version 1.0
+ *
+ * @section LICENSE
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details at
+ * https://www.gnu.org/copyleft/gpl.html
+ *
+ * @section DESCRIPTION
+ *
+ * 'cardgen' is a playing card image generator.
+ *
+ * Implementation for the info and desc classes.
+ */
 
 #include "cardgen.h"
 #include "desc.h"
@@ -32,21 +31,23 @@
 #include <fstream>
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- print function for info class.
-//
+/**
+ * print function for info class.
+ *
+ * @param  os - output stream.
+ */
 void info::print(ostream &os) const
 {
     os << H << "\t(" << X << ", " << Y << ")";
 }
 
 
-
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Get the image size from the .png file.
-//
+/**
+ * Check validity of the .png file.
+ *
+ * @param  buffer - raw bytes of the image file.
+ * @return true if valid, false otherwise.
+ */
 bool desc::isValidPNG(const char * const buffer)
 {
     const uint8_t magic[] = { 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A };
@@ -59,6 +60,12 @@ bool desc::isValidPNG(const char * const buffer)
     return true;
 }
 
+
+/**
+ * Read the size of the image in a png file and populate the class.
+ *
+ * @return error value or 0 if no errors.
+ */
 int desc::getImageSize(void)
 {
     FileFound = false;
@@ -92,11 +99,12 @@ int desc::getImageSize(void)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Set up "DrawString"" for drawing the .png file with the correct size and position.
-//
-int desc::genDrawString(void)
+/**
+ * Set up "DrawString"" for drawing the .png file with the correct size and position.
+ *
+ * @return error value or 0 if no errors.
+ */
+ int desc::genDrawString(void)
 {
     if ((Height == 0) || (Width == 0))
     {
@@ -113,10 +121,15 @@ int desc::genDrawString(void)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Constructors.
-//
+/**
+ * Constructor.
+ *
+ * @param  H - Height of image as a percentage of card height.
+ * @param  X - X value of centre of image as a percentage of card width.
+ * @param  Y - Y value of centre of image as a percentage of card height.
+ * @param  FN - Name of image file.
+ * @return true if valid, false otherwise.
+ */
 desc::desc(float H, float X, float Y, const string & FN)
 : FileName(FN), FileFound(false)
 {
@@ -130,6 +143,14 @@ desc::desc(float H, float X, float Y, const string & FN)
     genDrawString();
 }
 
+
+/**
+ * Constructor.
+ *
+ * @param  I - Height and position of image as a percentage of card size.
+ * @param  FN - Name of image file.
+ * @return true if valid, false otherwise.
+ */
 desc::desc(info & I, const string & FN)
 : FileName(FN), FileFound(false)
 {
@@ -144,10 +165,12 @@ desc::desc(info & I, const string & FN)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Reposition image and adjust internal values.
-//
+/**
+ * Reposition image and adjust internal values.
+ *
+ * @param  X - X value of centre of image as a percentage of card width.
+ * @param  Y - Y value of centre of image as a percentage of card height.
+ */
 void desc::repos(float X, float Y)
 {
     CentreX = X * cardWidth / 100;
@@ -158,10 +181,11 @@ void desc::repos(float X, float Y)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Change image file image and adjust internal values.
-//
+/**
+ * Change image file image and adjust internal values.
+ *
+ * @param  FN - New name of image file.
+ */
 void desc::setFileName(const string & FN)
 {
     FileName = FN;

@@ -1,28 +1,27 @@
-/*  cardgen - a playing card image generator.
-
-    Copyright 2019 Philip Lockett.
-
-    This file is part of cardgen.
-
-    cardgen is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    cardgen is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with cardgen.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// cardgen.h: Common interfaces for the card generator.
-//
-///////////////////////////////////////////////////////////////////////////////
+/**
+ * @file    cardgen.h
+ * @author  Phil Lockett <phillockett65@gmail.com>
+ * @version 1.0
+ *
+ * @section LICENSE
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details at
+ * https://www.gnu.org/copyleft/gpl.html
+ *
+ * @section DESCRIPTION
+ *
+ * 'cardgen' is a playing card image generator.
+ *
+ * Common interfaces for the card generator.
+ */
 
 #if !defined _CARDGEN_H_INCLUDED_
 #define _CARDGEN_H_INCLUDED_
@@ -40,12 +39,12 @@ using namespace std;
 #define ROUND(v) (int)((v) + 0.5)
 #endif
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Global variables.
-//
 
-// User defined.
+/**
+ * @section Global variables.
+ *
+ */
+
 extern int cardWidth;
 extern int cardHeight;
 extern string cardColour;
@@ -89,11 +88,12 @@ extern float imageX;
 extern float imageY;
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Common functions.
-//
-extern int recalculate(void);
+/**
+ * @section Common functions.
+ *
+ */
+
+extern void recalculate(void);
 extern int init(int argc, char *argv[]);
 extern int generateScript(int argc, char *argv[]);
 

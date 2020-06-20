@@ -1,28 +1,27 @@
-/*  cardgen - a playing card image generator.
-
-    Copyright 2019 Philip Lockett.
-
-    This file is part of cardgen.
-
-    cardgen is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    cardgen is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with cardgen.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// dump.cpp: Card generation script generator.
-//
-///////////////////////////////////////////////////////////////////////////////
+/**
+ * @file    dump.cpp
+ * @author  Phil Lockett <phillockett65@gmail.com>
+ * @version 1.0
+ *
+ * @section LICENSE
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details at
+ * https://www.gnu.org/copyleft/gpl.html
+ *
+ * @section DESCRIPTION
+ *
+ * 'cardgen' is a playing card image generator.
+ *
+ * Card generation script generator.
+ */
 
 #include <iostream>
 #include <string>
@@ -32,10 +31,11 @@
 #include "desc.h"
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Internal variables.
-//
+/**
+ * @section Internal variables.
+ *
+ */
+
 static const char* suits[]     = { "C", "D", "H", "S" };
 static const char* alts[]      = { "S", "H", "D", "C" };
 static const char* cards[]     = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
@@ -48,10 +48,11 @@ static string alt;
 static string card;
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Genarate the blank card string used as a template for each card.
-//
+/**
+ * Generate the initial blank card string used as a template for each card.
+ *
+ * @return the generated string.
+ */
 static string genStartString(void)
 {
     stringstream outputStream;
@@ -62,11 +63,15 @@ static string genStartString(void)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Generate the string for drawing the pips on the card. This is a two pass
-//  process. The second pass is after the image is rotated.
-//
+/**
+ * Generate the string for drawing the pips on the card. This is a two pass
+ * process. The second pass is after the image is rotated.
+ *
+ * @param  pass - First or second pass.
+ * @param  card - 1 to 13 (ace to king).
+ * @param  FileName - name of image file for the pip.
+ * @return the generated string.
+ */
 static string drawStandardPips(int pass, int card, const string & FileName)
 {
     stringstream outputStream;
@@ -169,14 +174,17 @@ static string drawStandardPips(int pass, int card, const string & FileName)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Generate the string for drawing the image on the card. Usually used for the
-//  court cards. Numerous internal variables need to be recalculated if the
-//  aspect ratio of the image is to be maintained, otherwise the image is
-//  stretched to fill the card. Note that this is done for each image because
-//  the dimensions can vary.
-//
+/**
+ * Generate the string for drawing the image on the card. Usually used for the
+ * court cards. Numerous internal variables need to be recalculated if the
+ * aspect ratio of the image is to be maintained, otherwise the image is
+ * stretched to fill the card. Note that this is done for each image because
+ * the dimensions can vary.
+ * 
+ * @param  faceD - Image descriptor.
+ * @param  FileName - name of image file for the pip.
+ * @return the generated string.
+ */
 static string drawImage(const desc & faceD, const string & FileName)
 {
     stringstream outputStream;
@@ -280,11 +288,13 @@ static string drawImage(const desc & faceD, const string & FileName)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- Joker drawing routines - a bit messy, but gets the job done.
-//
-static int drawImageMagickJoker(ofstream & file, const string & fileName)
+/**
+ * ImageMagick Joker drawing routine.
+ *
+ * @param  file - output file stream.
+ * @param  fileName - name of joker image file being generated.
+ */
+static void drawImageMagickJoker(ofstream & file, const string & fileName)
 {
     string startString = genStartString();
 
@@ -303,11 +313,16 @@ static int drawImageMagickJoker(ofstream & file, const string & fileName)
     file << "\t+dither -colors 256 \\" << endl;
     file << "\tcards/" << outputDirectory << "/" << fileName << ".png" << endl;
     file << endl;
-
-    return 1;
 }
 
-static int drawDefaultJoker(ofstream & file, const string & fileName)
+
+/**
+ * Default Joker drawing routine.
+ *
+ * @param  file - output file stream.
+ * @param  fileName - name of joker image file being generated.
+ */
+static void drawDefaultJoker(ofstream & file, const string & fileName)
 {
     string startString = genStartString();
     string currentCardColour = cardColour;
@@ -326,11 +341,17 @@ static int drawDefaultJoker(ofstream & file, const string & fileName)
     file << endl;
 
     cardColour = currentCardColour;
-
-    return 1;
 }
 
 
+/**
+ * Joker drawing routine - a bit messy, but gets the job done.
+ * 
+ * @param  fails - default joker image output count.
+ * @param  file - output file stream.
+ * @param  suit - index of suit for the joker being generated.
+ * @return 0 if joker image found and used, 1 if default joker created.
+ */
 static int drawJoker(int fails, ofstream & file, int suit)
 {
     file << "# Draw the " << suitNames[suit] << " " << cardNames[0] << " as file " << suits[suit] << cardNames[0] << ".png" << endl;
@@ -383,10 +404,13 @@ static int drawJoker(int fails, ofstream & file, int suit)
 }
 
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//- The bulk of the script generation work.
-//
+/**
+ * The bulk of the script generation work.
+ * 
+ * @param  argc - command line argument count.
+ * @param  argv - command line argument vector.
+ * @return error value or 0 if no errors.
+ */
 int generateScript(int argc, char *argv[])
 {
     ofstream file(scriptFilename.c_str());

@@ -36,14 +36,14 @@ int cardWidth  = 380;
 int cardHeight = 532;
 string cardColour("white");
 
-info Index(10.5, 8.07, 9.84);
-info CornerPip(7.5, 8.07, 20.41);
-info StandardPip(18.5, 25.7, 18.65);
-info ImagePip(14.29, 12.63, 9.77);
+info indexInfo(10.5, 8.07, 9.84);
+info cornerPipInfo(7.5, 8.07, 20.41);
+info standardPipInfo(18.5, 25.7, 18.65);
+info imagePipInfo(14.29, 12.63, 9.77);
 
-string indexDir("1");
-string pipDir("1");
-string faceDir("1");
+string indexDirectory("1");
+string pipDirectory("1");
+string faceDirectory("1");
 
 string scriptFilename("draw.sh");
 string refreshFilename("x_refresh.sh");

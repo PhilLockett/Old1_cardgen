@@ -49,14 +49,14 @@ extern int cardWidth;
 extern int cardHeight;
 extern string cardColour;
 
-extern info Index;
-extern info CornerPip;
-extern info StandardPip;
-extern info ImagePip;
+extern info indexInfo;
+extern info cornerPipInfo;
+extern info standardPipInfo;
+extern info imagePipInfo;
 
-extern string indexDir;
-extern string pipDir;
-extern string faceDir;
+extern string indexDirectory;
+extern string pipDirectory;
+extern string faceDirectory;
 
 extern string scriptFilename;
 extern string outputDirectory;

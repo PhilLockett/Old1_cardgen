@@ -44,38 +44,38 @@ static void help(const char * const name)
     cout << "  Generates the bash script \"" << scriptFilename << "\" which draws a pack of playing cards."<< endl;
     cout << endl;
     cout << "  Options:" << endl;
-    cout << "\t--help \t\t\t\t\tThis help page and nothing else." << endl;
-    cout << "\t-v --version \t\t\t\tDisplay version." << endl;
+    cout << "\t--help \t\t\t\tThis help page and nothing else." << endl;
+    cout << "\t-v --version \t\t\tDisplay version." << endl;
     cout << endl;
-    cout << "\t-i --index directory \t\t\tSubdirectory of indices to use (default: \"" << indexDir << "\")." << endl;
-    cout << "\t-p --pip directory \t\t\tSubdirectory of pips to use (default: \"" << pipDir << "\")." << endl;
-    cout << "\t-f --face directory \t\t\tSubdirectory of faces to use (default: \"" << faceDir << "\")." << endl;
+    cout << "\t-i --index directory \t\tSubdirectory of indices to use (default: \"" << indexDirectory << "\")." << endl;
+    cout << "\t-p --pip directory \t\tSubdirectory of pips to use (default: \"" << pipDirectory << "\")." << endl;
+    cout << "\t-f --face directory \t\tSubdirectory of faces to use (default: \"" << faceDirectory << "\")." << endl;
     cout << endl;
-    cout << "\t-s --script filename \t\t\tScript filename (default: \"" << scriptFilename << "\")." << endl;
-    cout << "\t-o --output directory \t\t\tOutput filename (default: same directory name as face)." << endl;
-    cout << "\t-w --width integer \t\t\tCard width in pixels (default: " << cardWidth << ")." << endl;
-    cout << "\t-h --height integer \t\t\tCard height in pixels (default: " << cardHeight << ")." << endl;
-    cout << "\t-c --colour name \t\t\tBackground colour name (defined at: http://www.imagemagick.org/script/color.php, default: \"" << cardColour << "\")." << endl;
-    cout << "\t-a --KeepAspectRatio \t\t\tKeep image Aspect Ratio (default: " << (keepAspectRatio ? "true" : "false") << ")." << endl;
+    cout << "\t-s --script filename \t\tScript filename (default: \"" << scriptFilename << "\")." << endl;
+    cout << "\t-o --output directory \t\tOutput filename (default: same directory name as face)." << endl;
+    cout << "\t-w --width integer \t\tCard width in pixels (default: " << cardWidth << ")." << endl;
+    cout << "\t-h --height integer \t\tCard height in pixels (default: " << cardHeight << ")." << endl;
+    cout << "\t-c --colour name \t\tBackground colour name (defined at: http://www.imagemagick.org/script/color.php, default: \"" << cardColour << "\")." << endl;
+    cout << "\t-a --KeepAspectRatio \t\tKeep image Aspect Ratio (default: " << (keepAspectRatio ? "true" : "false") << ")." << endl;
     cout << endl;
-    cout << "\t--IndexHeight value \t\t\tHeight of index as a % of card height (default: " << Index.getH() << ")." << endl;
-    cout << "\t--IndexCentreX value \t\t\tX value of centre of index as a % of card width (default: " << Index.getX() << ")." << endl;
-    cout << "\t--IndexCentreY value \t\t\tY value of centre of index as a % of card height (default: " << Index.getY() << ")." << endl;
-    cout << "\t--CornerPipHeight value \t\tHeight of corner pip as a % of card height (default: " << CornerPip.getH() << ")." << endl;
-    cout << "\t--CornerPipCentreX value \t\tX value of centre of corner pip as a % of card width (default: " << CornerPip.getX() << ")." << endl;
-    cout << "\t--CornerPipCentreY value \t\tY value of centre of corner pip as a % of card height (default: " << CornerPip.getY() << ")." << endl;
-    cout << "\t--StandardPipHeight value \t\tHeight of standard pip as a % of card height (default: " << StandardPip.getH() << ")." << endl;
-    cout << "\t--StandardPipCentreX value \t\tX value of centre of standard pip as a % of card width (default: " << StandardPip.getX() << ")." << endl;
-    cout << "\t--StandardPipCentreY value \t\tY value of centre of standard pip as a % of card height (default: " << StandardPip.getY() << ")." << endl;
-    cout << "\t--ImageBoarderX value \t\t\tImage Boarder in X direction as a % of card width (default: " << boarderX << ")." << endl;
-    cout << "\t--ImageBoarderY value \t\t\tImage Boarder in Y direction as a % of card height (default: " << boarderY << ")." << endl;
-    cout << "\t--ImagePipOff \t\t\t\tDon't display image pip on the court cards." << endl;
-    cout << "\t--ImagePipHeight value \t\t\tHeight of image pip as a % of card height (default: " << ImagePip.getH() << ")." << endl;
-    cout << "\t--ImagePipCentreX value \t\tX value of centre of image pip as a % of card width relative to ImageBoarderX (default: " << ImagePip.getX() << ")." << endl;
-    cout << "\t--ImagePipCentreY value \t\tY value of centre of image pip as a % of card height relative to ImageBoarderY (default: " << ImagePip.getY() << ")." << endl;
+    cout << "\t--IndexHeight value \t\tHeight of index as a % of card height (default: " << indexInfo.getH() << ")." << endl;
+    cout << "\t--IndexCentreX value \t\tX value of centre of index as a % of card width (default: " << indexInfo.getX() << ")." << endl;
+    cout << "\t--IndexCentreY value \t\tY value of centre of index as a % of card height (default: " << indexInfo.getY() << ")." << endl;
+    cout << "\t--CornerPipHeight value \tHeight of corner pip as a % of card height (default: " << cornerPipInfo.getH() << ")." << endl;
+    cout << "\t--CornerPipCentreX value \tX value of centre of corner pip as a % of card width (default: " << cornerPipInfo.getX() << ")." << endl;
+    cout << "\t--CornerPipCentreY value \tY value of centre of corner pip as a % of card height (default: " << cornerPipInfo.getY() << ")." << endl;
+    cout << "\t--StandardPipHeight value \tHeight of standard pip as a % of card height (default: " << standardPipInfo.getH() << ")." << endl;
+    cout << "\t--StandardPipCentreX value \tX value of centre of standard pip as a % of card width (default: " << standardPipInfo.getX() << ")." << endl;
+    cout << "\t--StandardPipCentreY value \tY value of centre of standard pip as a % of card height (default: " << standardPipInfo.getY() << ")." << endl;
+    cout << "\t--ImageBoarderX value \t\tImage Boarder in X direction as a % of card width (default: " << boarderX << ")." << endl;
+    cout << "\t--ImageBoarderY value \t\tImage Boarder in Y direction as a % of card height (default: " << boarderY << ")." << endl;
+    cout << "\t--ImagePipOff \t\t\tDon't display image pip on the court cards." << endl;
+    cout << "\t--ImagePipHeight value \t\tHeight of image pip as a % of card height (default: " << imagePipInfo.getH() << ")." << endl;
+    cout << "\t--ImagePipCentreX value \tX value of centre of image pip as a % of card width relative to ImageBoarderX (default: " << imagePipInfo.getX() << ")." << endl;
+    cout << "\t--ImagePipCentreY value \tY value of centre of image pip as a % of card height relative to ImageBoarderY (default: " << imagePipInfo.getY() << ")." << endl;
     cout << endl;
-    cout << "\t--CentreX value \t\t\tShortcut for: --IndexCentreX value --CornerPipCentreX value." << endl;
-    cout << "\t--Inputs value \t\t\t\tShortcut for: -f value -p value -i value." << endl;
+    cout << "\t--CentreX value \t\tShortcut for: --IndexCentreX value --CornerPipCentreX value." << endl;
+    cout << "\t--Inputs value \t\t\tShortcut for: -f value -p value -i value." << endl;
 }
 
 
@@ -151,47 +151,47 @@ static int parseCommandLine(int argc, char *argv[])
 
         switch (optchr)
         {
-            case 'w': cardWidth = atoi(optarg);         break;
-            case 'h': cardHeight = atoi(optarg);        break;
-            case 'c': cardColour = string(optarg);      break;
+            case 'w': cardWidth = atoi(optarg);             break;
+            case 'h': cardHeight = atoi(optarg);            break;
+            case 'c': cardColour = string(optarg);          break;
 
-            case 'i': indexDir = string(optarg);        break;
-            case 'p': pipDir = string(optarg);          break;
-            case 'f': faceDir = string(optarg);         break;
+            case 'i': indexDirectory = string(optarg);      break;
+            case 'p': pipDirectory = string(optarg);        break;
+            case 'f': faceDirectory = string(optarg);       break;
 
-            case 's': scriptFilename = string(optarg);  break;
-            case 'o': outputDirectory = string(optarg); break;
+            case 's': scriptFilename = string(optarg);      break;
+            case 'o': outputDirectory = string(optarg);     break;
 
-            case 'a': keepAspectRatio = true;           break;
+            case 'a': keepAspectRatio = true;               break;
 
-            case 1:   Index.setH(atof(optarg));         break;
-            case 2:   Index.setX(atof(optarg));         break;
-            case 3:   Index.setY(atof(optarg));         break;
+            case 1:   indexInfo.setH(atof(optarg));         break;
+            case 2:   indexInfo.setX(atof(optarg));         break;
+            case 3:   indexInfo.setY(atof(optarg));         break;
 
-            case 4:   CornerPip.setH(atof(optarg));     break;
-            case 5:   CornerPip.setX(atof(optarg));     break;
-            case 6:   CornerPip.setY(atof(optarg));     break;
+            case 4:   cornerPipInfo.setH(atof(optarg));     break;
+            case 5:   cornerPipInfo.setX(atof(optarg));     break;
+            case 6:   cornerPipInfo.setY(atof(optarg));     break;
 
-            case 7:   StandardPip.setH(atof(optarg));   break;
-            case 8:   StandardPip.setX(atof(optarg));   break;
-            case 9:   StandardPip.setY(atof(optarg));   break;
+            case 7:   standardPipInfo.setH(atof(optarg));   break;
+            case 8:   standardPipInfo.setX(atof(optarg));   break;
+            case 9:   standardPipInfo.setY(atof(optarg));   break;
 
-            case 10:  boarderX = atof(optarg);          break;
-            case 11:  boarderY = atof(optarg);          break;
-            case 12:  ImagePip.setH(0);                 break;
-            case 13:  ImagePip.setH(atof(optarg));      break;
-            case 14:  ImagePip.setX(atof(optarg));      break;
-            case 15:  ImagePip.setY(atof(optarg));      break;
+            case 10:  boarderX = atof(optarg);              break;
+            case 11:  boarderY = atof(optarg);              break;
+            case 12:  imagePipInfo.setH(0);                 break;
+            case 13:  imagePipInfo.setH(atof(optarg));      break;
+            case 14:  imagePipInfo.setX(atof(optarg));      break;
+            case 15:  imagePipInfo.setY(atof(optarg));      break;
 
             case 16:
-                Index.setX(atof(optarg));
-                CornerPip.setX(atof(optarg));
+                indexInfo.setX(atof(optarg));
+                cornerPipInfo.setX(atof(optarg));
                 break;
 
             case 17:
-                indexDir = string(optarg);
-                pipDir   = string(optarg);
-                faceDir  = string(optarg);
+                indexDirectory = string(optarg);
+                pipDirectory   = string(optarg);
+                faceDirectory  = string(optarg);
                 break;
 
             case 'v':
@@ -240,7 +240,7 @@ void recalculate(void)
 //- If "outputDirectory" isn't explicitly set, use "face".
     if (!outputDirectory.length())
     {
-        outputDirectory = faceDir;
+        outputDirectory = faceDirectory;
     }
 }
 
@@ -266,10 +266,10 @@ static void dumpValues(void)
 	cout << "outlineWidth\t" << outlineWidth << endl;
 	cout << "outlineHeight\t" << outlineHeight << endl;
 	cout << endl;
-	cout << "Index\t\t" << Index << endl;
-	cout << "CornerPip\t" << CornerPip << endl;
-	cout << "StandardPip\t" << StandardPip << endl;
-	cout << "ImagePip\t" << ImagePip << endl;
+	cout << "indexInfo\t\t" << indexInfo << endl;
+	cout << "cornerPipInfo\t" << cornerPipInfo << endl;
+	cout << "standardPipInfo\t" << standardPipInfo << endl;
+	cout << "imagePipInfo\t" << imagePipInfo << endl;
 	cout << endl;
 	cout << "cardWidth\t" << cardWidth << endl;
 	cout << "cardHeight\t" << cardHeight << endl;

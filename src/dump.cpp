@@ -69,49 +69,49 @@ static string genStartString(void)
  *
  * @param  pass - First or second pass.
  * @param  card - 1 to 13 (ace to king).
- * @param  FileName - name of image file for the pip.
+ * @param  fileName - name of image file for the pip.
  * @return the generated string.
  */
-static string drawStandardPips(int pass, int card, const string & FileName)
+static string drawStandardPips(int pass, int card, const string & fileName)
 {
     stringstream outputStream;
-    desc pipD(StandardPip, FileName);
+    desc pipD(standardPipInfo, fileName);
 
     if (pass == 1)
     {
         if ((card == 2) || (card == 3) || (card == 12) || (card == 13))
         {
-            pipD.repos(50, StandardPip.getY());
+            pipD.repos(50, standardPipInfo.getY());
             outputStream  << pipD.draw();
         }
 
         if (card >= 4)
         {
-            pipD.repos(StandardPip.getX(), StandardPip.getY());
+            pipD.repos(standardPipInfo.getX(), standardPipInfo.getY());
             outputStream  << pipD.draw();
 
-            pipD.repos(100-StandardPip.getX(), StandardPip.getY());
+            pipD.repos(100-standardPipInfo.getX(), standardPipInfo.getY());
             outputStream  << pipD.draw();
         }
 
         if ((card == 8) || (card > 10))
         {
-            pipD.repos(50, (50+StandardPip.getY())/2);
+            pipD.repos(50, (50+standardPipInfo.getY())/2);
             outputStream  << pipD.draw();
         }
 
         if (card >= 9)
         {
-            pipD.repos(StandardPip.getX(), StandardPip.getY()+(100-StandardPip.getY()-StandardPip.getY())/3);
+            pipD.repos(standardPipInfo.getX(), standardPipInfo.getY()+(100-standardPipInfo.getY()-standardPipInfo.getY())/3);
             outputStream  << pipD.draw();
 
-            pipD.repos(100-StandardPip.getX(), StandardPip.getY()+(100-StandardPip.getY()-StandardPip.getY())/3);
+            pipD.repos(100-standardPipInfo.getX(), standardPipInfo.getY()+(100-standardPipInfo.getY()-standardPipInfo.getY())/3);
             outputStream  << pipD.draw();
         }
 
         if (card == 10)
         {
-            pipD.repos(50, StandardPip.getY()+(100-StandardPip.getY()-StandardPip.getY())/6);
+            pipD.repos(50, standardPipInfo.getY()+(100-standardPipInfo.getY()-standardPipInfo.getY())/6);
             outputStream  << pipD.draw();
         }
     }
@@ -126,46 +126,46 @@ static string drawStandardPips(int pass, int card, const string & FileName)
 
         if ((card == 2) || (card == 3) || (card == 12) || (card == 13))
         {
-            pipD.repos(50, StandardPip.getY());
+            pipD.repos(50, standardPipInfo.getY());
             outputStream  << pipD.draw();
         }
 
         if (card >= 4)
         {
-            pipD.repos(StandardPip.getX(), StandardPip.getY());
+            pipD.repos(standardPipInfo.getX(), standardPipInfo.getY());
             outputStream  << pipD.draw();
 
-            pipD.repos(100-StandardPip.getX(), StandardPip.getY());
+            pipD.repos(100-standardPipInfo.getX(), standardPipInfo.getY());
             outputStream  << pipD.draw();
         }
 
         if ((card == 6) || (card == 7) || (card == 8))
         {
-            pipD.repos(StandardPip.getX(), 50);
+            pipD.repos(standardPipInfo.getX(), 50);
             outputStream  << pipD.draw();
 
-            pipD.repos(100-StandardPip.getX(), 50);
+            pipD.repos(100-standardPipInfo.getX(), 50);
             outputStream  << pipD.draw();
         }
 
         if ((card == 7) || (card == 8) || (card > 10))
         {
-            pipD.repos(50, (50+StandardPip.getY())/2);
+            pipD.repos(50, (50+standardPipInfo.getY())/2);
             outputStream  << pipD.draw();
         }
 
         if (card >= 9)
         {
-            pipD.repos(StandardPip.getX(), StandardPip.getY()+(100-StandardPip.getY()-StandardPip.getY())/3);
+            pipD.repos(standardPipInfo.getX(), standardPipInfo.getY()+(100-standardPipInfo.getY()-standardPipInfo.getY())/3);
             outputStream  << pipD.draw();
 
-            pipD.repos(100-StandardPip.getX(), StandardPip.getY()+(100-StandardPip.getY()-StandardPip.getY())/3);
+            pipD.repos(100-standardPipInfo.getX(), standardPipInfo.getY()+(100-standardPipInfo.getY()-standardPipInfo.getY())/3);
             outputStream  << pipD.draw();
         }
 
         if (card == 10)
         {
-            pipD.repos(50, StandardPip.getY()+(100-StandardPip.getY()-StandardPip.getY())/6);
+            pipD.repos(50, standardPipInfo.getY()+(100-standardPipInfo.getY()-standardPipInfo.getY())/6);
             outputStream  << pipD.draw();
         }
     }
@@ -182,10 +182,10 @@ static string drawStandardPips(int pass, int card, const string & FileName)
  * the dimensions can vary.
  * 
  * @param  faceD - Image descriptor.
- * @param  FileName - name of image file for the pip.
+ * @param  fileName - name of image file for the pip.
  * @return the generated string.
  */
-static string drawImage(const desc & faceD, const string & FileName)
+static string drawImage(const desc & faceD, const string & fileName)
 {
     stringstream outputStream;
     int x = offsetX;
@@ -242,44 +242,44 @@ static string drawImage(const desc & faceD, const string & FileName)
     outputStream << "\t-draw \"image over " << x << ',' << y << ' ' << w << ',' << h << " '" << faceD.getFileName() << "'\" \\" << endl;
 
 //- Check if image pips are required.
-    if (ImagePip.getH())
+    if (imagePipInfo.getH())
     {
-        info scaledPip(ImagePip);
+        info scaledPip(imagePipInfo);
 
 //- Rescale image pips, but only if they haven't been manually altered.
-        if (!ImagePip.isChangedH())
+        if (!imagePipInfo.isChangedH())
         {
             scale = (float)h / originalHeightPX;
             if (!faceD.isLandscape())
             {
                 scale /= 2;
             }
-            scaledPip.setH(scale * ImagePip.getH());
+            scaledPip.setH(scale * imagePipInfo.getH());
         }
 
-        if (!ImagePip.isChangedX())
+        if (!imagePipInfo.isChangedX())
         {
             scale = (float)w / originalWidthPX;
-            scaledPip.setX(scale * ImagePip.getX());
+            scaledPip.setX(scale * imagePipInfo.getX());
         }
 
-        if (!ImagePip.isChangedY())
+        if (!imagePipInfo.isChangedY())
         {
             scale = (float)h / originalHeightPX;
             if (!faceD.isLandscape())
             {
                 scale /= 2;
             }
-            scaledPip.setY(scale * ImagePip.getY());
+            scaledPip.setY(scale * imagePipInfo.getY());
         }
 
 //- Pip Filename is only supplied for court cards if they need pips adding.
-        desc pipD(scaledPip, FileName);
+        desc pipD(scaledPip, fileName);
         if (pipD.isFileFound())
         {
-            outputStream << "\t-draw \"image over " << pipD.getOriginX()+x << ',' << pipD.getOriginY()+y << ' ' << ROUND(pipD.getWidth()) << ',' << ROUND(pipD.getHeight()) << " '" << FileName << "'\" \\" << endl;
+            outputStream << "\t-draw \"image over " << pipD.getOriginX()+x << ',' << pipD.getOriginY()+y << ' ' << ROUND(pipD.getWidth()) << ',' << ROUND(pipD.getHeight()) << " '" << fileName << "'\" \\" << endl;
             outputStream << "\t-rotate 180 \\" << endl;
-            outputStream << "\t-draw \"image over " << pipD.getOriginX()+x << ',' << pipD.getOriginY()+y << ' ' << ROUND(pipD.getWidth()) << ',' << ROUND(pipD.getHeight()) << " '" << FileName << "'\" \\" << endl;
+            outputStream << "\t-draw \"image over " << pipD.getOriginX()+x << ',' << pipD.getOriginY()+y << ' ' << ROUND(pipD.getWidth()) << ',' << ROUND(pipD.getHeight()) << " '" << fileName << "'\" \\" << endl;
             outputStream << "\t-rotate 180 \\" << endl;
         }
     }
@@ -357,11 +357,11 @@ static int drawJoker(int fails, ofstream & file, int suit)
     file << "# Draw the " << suitNames[suit] << " " << cardNames[0] << " as file " << suits[suit] << cardNames[0] << ".png" << endl;
 
     string fileName = string(suits[suit]) + cardNames[0];
-    string faceFile = string("faces/") + faceDir + "/" + fileName + ".png";
+    string faceFile = string("faces/") + faceDirectory + "/" + fileName + ".png";
     desc faceD(95, 50, 50, faceFile);
 
-    string indexFile = string("indices/") + indexDir + "/" + fileName + ".png";
-    desc indexD(Index, indexFile);
+    string indexFile = string("indices/") + indexDirectory + "/" + fileName + ".png";
+    desc indexD(indexInfo, indexFile);
 
     if ((indexD.isFileFound()) || (faceD.isFileFound()))
     {
@@ -469,12 +469,12 @@ int generateScript(int argc, char *argv[])
         suit    = string(suits[s]);
         alt     = string(alts[s]);
 
-        string pipFile = string("pips/") + pipDir + "/" + suit + "S.png";      // Try small pip file first.
-        desc pipD(CornerPip, pipFile);
+        string pipFile = string("pips/") + pipDirectory + "/" + suit + "S.png";      // Try small pip file first.
+        desc pipD(cornerPipInfo, pipFile);
         if (!pipD.isFileFound())
         {
             // Small pip file not found, so use standard pip file.
-            pipFile = string("pips/") + pipDir + "/" + suit + ".png";
+            pipFile = string("pips/") + pipDirectory + "/" + suit + ".png";
             pipD.setFileName(pipFile);
         }
 
@@ -482,21 +482,21 @@ int generateScript(int argc, char *argv[])
         {
             card = string(cards[c]);
 
-            string indexFile = string("indices/") + indexDir + "/" + suit + card + ".png";
-            desc indexD(Index, indexFile);
+            string indexFile = string("indices/") + indexDirectory + "/" + suit + card + ".png";
+            desc indexD(indexInfo, indexFile);
             if (!indexD.isFileFound())
             {
-                // Index for suit file not found, so use alternate index file.
-                indexFile = string("indices/") + indexDir + "/" + alt + card + ".png";
+                // indexInfo for suit file not found, so use alternate index file.
+                indexFile = string("indices/") + indexDirectory + "/" + alt + card + ".png";
                 indexD.setFileName(indexFile);
             }
 
-            string faceFile = string("faces/") + faceDir + "/" + suit + card + ".png";
+            string faceFile = string("faces/") + faceDirectory + "/" + suit + card + ".png";
             desc faceD(imageHeight, imageX, imageY, faceFile);
 
             string drawFace;
 
-            pipFile = string("pips/") + pipDir + "/" + suit + ".png";      // Use standard pip file.
+            pipFile = string("pips/") + pipDirectory + "/" + suit + ".png";      // Use standard pip file.
             if (faceD.useStandardPips())
             {
                 // The face directory does not have the needed image file, use standard pips.
@@ -542,8 +542,8 @@ int generateScript(int argc, char *argv[])
 //- Add the Jokers using narrower boarders.
     boarderX = 7;
     boarderY = 5;
-	Index.setH(30.0);
-	Index.setY(20.0);
+    indexInfo.setH(30.0);
+    indexInfo.setY(20.0);
     recalculate();
 
     int fails = 0;

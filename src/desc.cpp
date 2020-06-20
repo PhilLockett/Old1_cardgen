@@ -127,11 +127,11 @@ int desc::getImageSize(void)
  * @param  H - Height of image as a percentage of card height.
  * @param  X - X value of centre of image as a percentage of card width.
  * @param  Y - Y value of centre of image as a percentage of card height.
- * @param  FN - Name of image file.
+ * @param  fileName - Name of image file.
  * @return true if valid, false otherwise.
  */
-desc::desc(float H, float X, float Y, const string & FN)
-: FileName(FN), FileFound(false)
+desc::desc(float H, float X, float Y, const string & fileName)
+: FileName(fileName), FileFound(false)
 {
     getImageSize();
     Height  = H * cardHeight / 100;
@@ -148,11 +148,11 @@ desc::desc(float H, float X, float Y, const string & FN)
  * Constructor.
  *
  * @param  I - Height and position of image as a percentage of card size.
- * @param  FN - Name of image file.
+ * @param  fileName - Name of image file.
  * @return true if valid, false otherwise.
  */
-desc::desc(info & I, const string & FN)
-: FileName(FN), FileFound(false)
+desc::desc(info & I, const string & fileName)
+: FileName(fileName), FileFound(false)
 {
     getImageSize();
     Height  = I.getH() * cardHeight / 100;
@@ -184,11 +184,11 @@ void desc::repos(float X, float Y)
 /**
  * Change image file image and adjust internal values.
  *
- * @param  FN - New name of image file.
+ * @param  fileName - Name of new image file.
  */
-void desc::setFileName(const string & FN)
+void desc::setFileName(const string & fileName)
 {
-    FileName = FN;
+    FileName = fileName;
     getImageSize();
     Width   = Height * WidthPX / HeightPX;
     OriginX = ROUND(centre2OriginX(CentreX));

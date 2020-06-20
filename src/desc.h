@@ -82,6 +82,7 @@ private:
     bool isValidPNG(const char * const buffer);
     int getImageSize(void);
     int genDrawString(void);
+
     string DrawString;
     bool FileFound;
     int WidthPX;
@@ -101,7 +102,7 @@ public:
     desc(float H, float X, float Y, const string & FN);
     desc(info & I, const string & FN);
     void repos(float X, float Y);
-    void setFileName(const string & FN);
+    void setFileName(const string & fileName);
     const string & getFileName(void) const { return FileName; }
 
     float getCentreX(void) const { return CentreX; }

@@ -21,9 +21,11 @@ To clone, install and run this code, execute the following unix/linux commands:
 
 ## Creating a tarball
 
-Sometimes it is more convenient to use a tarbar than connect to github. The 
-following command will create a tarball called 'cardgen-1.0.tar.gz':
+Sometimes it is more convenient to use a tarbar to share software than connect 
+to github. The following command will create a tarball called 
+'cardgen-1.0.tar.gz' from a cloned copy of the code:
 
+    cd CardGen/
     make dist
 
 ## Installing from tarball
@@ -40,14 +42,26 @@ processing suite installed. The following command will unpack the tarball.
 
     tar zxf cardgen-1.0.tar.gz
 
-After unpacking  issue the following shell commands:
+After unpacking, issue the following shell commands:
 
     cd cardgen-1.0/
     ./configure
     make
     sudo make install
 
-## Further reading
+## Next steps and Further reading
 
-The document 'CardGeneratorUserGuide.pdf' describes both the installation 
-process and usage with many examples.
+With 'cardgen' installed the following command will display the help page:
+
+    cardgen --help
+
+'cardgen' works in an environment containing the component images it needs to 
+compose the playing card images. This environment is set up with the following 
+commands:
+
+    tar zxf CardWork.tar.gz
+    cd CardWork/
+    ./setup.sh
+
+The document 'CardGeneratorUserGuide.pdf' describes the installation, the 
+environment set up and 'cardgen' usage with many examples.

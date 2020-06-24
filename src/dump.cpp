@@ -331,6 +331,17 @@ static void drawDefaultJoker(ofstream & file, const string & fileName)
 
     startString = genStartString();
     file << startString;
+
+    // Draw "Joker" indices if provided.
+    string indexFile = string("indices/") + indexDirectory + "/" + suit + "Joker.png";
+    desc indexD(indexInfo, indexFile);
+    if (indexD.isFileFound())
+    {
+        file << indexD.draw();
+        file << "\t-rotate 180 \\" << endl;
+        file << indexD.draw();
+    }
+
     file << drawImage(faceD, "");
     file << "\t+dither -colors 256 \\" << endl;
     file << "\tcards/" << outputDirectory << "/" << fileName << ".png" << endl;

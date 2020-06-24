@@ -325,22 +325,16 @@ static void drawImageMagickJoker(ofstream & file, const string & fileName)
 static void drawDefaultJoker(ofstream & file, const string & fileName)
 {
     string startString = genStartString();
-    string currentCardColour = cardColour;
-    cardColour = "white";
 
-    string faceFile = string("boneyard/ImageMagick_logo.svg.png");
+    string faceFile = string("boneyard/Back.png");
     desc faceD(95, 50, 50, faceFile);
 
     startString = genStartString();
-    faceFile = string("boneyard/Back.png");
-    faceD.setFileName(faceFile);
     file << startString;
     file << drawImage(faceD, "");
     file << "\t+dither -colors 256 \\" << endl;
     file << "\tcards/" << outputDirectory << "/" << fileName << ".png" << endl;
     file << endl;
-
-    cardColour = currentCardColour;
 }
 
 

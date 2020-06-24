@@ -49,7 +49,7 @@ After unpacking, issue the following shell commands:
     make
     sudo make install
 
-## Next steps and Further reading
+## Next steps
 
 With 'cardgen' installed the following command will display the help page:
 
@@ -63,5 +63,11 @@ commands:
     cd CardWork/
     ./setup.sh
 
+# Further reading
+
 The document 'CardGeneratorUserGuide.pdf' describes the installation, the 
 environment set up and 'cardgen' usage with many examples.
+
+# Additional packages
+
+Additional packages are currentlt unavailable.

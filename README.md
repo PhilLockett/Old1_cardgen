@@ -1,6 +1,7 @@
 # cardgen
 
-'cardgen' is a command-line utility that images representing playing cards.
+'cardgen' is a command-line utility that generates images representing playing 
+cards.
 
 ## Overview
 

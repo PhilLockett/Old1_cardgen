@@ -3,7 +3,6 @@ install-sh
 missing
 depcomp
 Makefile.in
-configure
 aclocal.m4
 src/config.h.in
 src/Makefile.in

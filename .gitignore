@@ -1,11 +1,5 @@
 autom4te.cache/*
-install-sh
-missing
-depcomp
-Makefile.in
 aclocal.m4
-src/config.h.in
-src/Makefile.in
 config.log
 config.status
 Makefile

@@ -13,8 +13,8 @@ greatly varying styles to be created.
 
 To clone, install and run this code, execute the following unix/linux commands:
 
-    git clone https://github.com/PhilLockett/CardGen.git
-    cd CardGen/
+    git clone https://github.com/PhilLockett/cardgen.git
+    cd cardgen/
     ./configure
     make
     sudo make install
@@ -25,14 +25,14 @@ Sometimes it is more convenient to use a tarbar to share software than connect
 to github. The following command will create a tarball called 
 'cardgen-1.0.tar.gz' from a cloned copy of the code:
 
-    cd CardGen/
+    cd cardgen/
     make dist
 
 ## Installing from tarball
 
 The install process described in the INSTALL document is a generic 
 description of the install process. The install process is also described 
-in the 'CardGeneratorUserGuide.pdf' document. For completeness the install 
+in the 'cardgeneratorUserGuide.pdf' document. For completeness the install 
 process is also described below. All three descriptions are essentially the 
 same and clearly, it only needs to be installed once.
 
@@ -65,7 +65,7 @@ commands:
 
 # Further reading
 
-The document 'CardGeneratorUserGuide.pdf' describes the installation, the 
+The document 'cardgeneratorUserGuide.pdf' describes the installation, the 
 environment set up and 'cardgen' usage with many examples.
 
 # Additional packages
